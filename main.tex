@@ -1,0 +1,14 @@
+\section{Cosmological Constraints and Boundary Conditions}
+To ensure our modified Friedmann equation remains physically viable, it must satisfy the boundary condition at the present epoch ($z = 0$), where the expansion rate $H(z)$ must identically equal the measured Hubble constant $H_0$. 
+
+We define the dimensionless density parameters as $\Omega_i \equiv \rho_i / \rho_c$, where $\rho_c = 3H_0^2 / 8\pi G$ is the critical density of the universe. Setting $z = 0$ in our modified equation yields the following constraint equation:
+\begin{equation}
+    1 = \Omega_{\text{brane}} + \Omega_0 \left( \frac{\chi_0}{1 - \chi_0} \right) - \Omega_k
+\end{equation}
+where $\chi_0 \equiv \chi(z=0)$ represents the current value of the dimensionless parameter, and $\Omega_k = k/H_0^2$ denotes the spatial curvature density. 
+
+To preserve degrees of freedom during data fitting, we treat $\Omega_{\text{brane}}$, $\Omega_k$, and $\chi_0$ as independent free parameters, forcing the coupling amplitude $\Omega_0$ to act as a dependent normalization factor defined by:
+\begin{equation}
+    \Omega_0 = (1 + \Omega_k - \Omega_{\text{brane}}) \left( \frac{1 - \chi_0}{\chi_0} \right)
+\end{equation}
+As demonstrated in our numerical analysis, this constraint successfully aligns the model's luminosity distance predictions $D_L(z)$ with modern Type Ia Supernovae observations.
