@@ -13,6 +13,7 @@ main.tex/ - full LaTeX source
 
 gravity.pdf - Full paper in PDF format
 
+unified.zip - New paper containing equations and explanations after testing.
 
 Purpose
 This project argues that the structural asymmetry between General Relativity and Quantum Mechanics is not a technical obstacle but a conceptual one. Gravity cannot be unified with the quantum forces at the level of fields because it is the baseline that defines the arena in which fields exist.
