@@ -7,6 +7,8 @@ Gravity is not a force within spacetime but the geometric structure that defines
 Because all physical systems exist within this structure, gravity acts as the universal baseline against which all other interactions are measured.
 A successful unification of physics must therefore arise from a deeper, pre‑geometric quantum substrate.
 
+Gravity functions as the universal baseline against which all physical quantities are defined, so attempts to quantize it fail because they treat the unit of measurement as if it were just another measurable field.
+
 Contents:
 
 main.tex/ - full LaTeX source
