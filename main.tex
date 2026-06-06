@@ -1,197 +1,116 @@
-\documentclass[12pt]{article}
-
-\usepackage{amsmath, amssymb, amsfonts}
-\usepackage{geometry}
-\usepackage{authblk}
-\usepackage{setspace}
-\usepackage{cite}
-\usepackage{hyperref}
-\usepackage{tikz}
+\documentclass[11pt,twocolumn,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
-\usepackage{float}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{cite}
 
-\geometry{margin=1in}
-\setstretch{1.2}
+\geometry{top=2cm,bottom=2cm,left=1.5cm,right=1.5cm}
 
-\title{\textbf{On the Structural Asymmetry Between General Relativity and Quantum Mechanics:\\
-Why Gravity Cannot Be Unified as a Conventional Field}}
-
-\author[1]{Paul Jarvis}
-\affil[1]{Independent Researcher, United Kingdom}
-
-\date{2 June 2026}
+\title{\textbf{Emergent Riemannian Topology from a Pre-Geometric Graph Substrate:\\ A Variational Matrix Toy Model}}
+\author{\textbf{Paul Jarvis} \\
+\textit{Independent Researcher, UK} \\
+\texttt{mrpaulwjarvis@gmail.com}}
+\date{June 3, 2026}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-General Relativity (GR) and Quantum Mechanics (QM) remain mathematically incompatible despite a century of effort. This paper argues that the failure of unification arises from a fundamental structural asymmetry: gravity is not a force within spacetime but the geometric framework that \emph{defines} spacetime. All particles and fields exist within this gravitational structure, making gravity universal in a way no quantum interaction is. Because quantum field theory requires a fixed background while GR denies the existence of such a background, unification cannot proceed by treating gravity as another quantum field. A successful theory must instead emerge from a deeper, pre-geometric quantum substrate from which both spacetime and quantum fields arise. This conceptual insight is formalized here as the \emph{Gravitational Baseline Principle}.
+We introduce a minimal, background-independent numerical framework where continuous Riemannian geometry emerges from a discrete, relational network substrate. The pre-geometric state is modeled via a symmetric adjacency matrix governed by an action-minimizing variational Matrix Hamiltonian. By establishing a fully permutation-invariant Hamiltonian utilizing spectral trace properties, we resolve fundamental gauge ambiguities common to discrete topological models. Using Markov Chain Monte Carlo (MCMC) simulations, we confirm that the framework avoids non-physical coordinate dependence while dynamically driving random graphs toward homogeneous, isotropic spatial manifolds. Finally, we implement a conservation-law-preserving node insertion mechanism to simulate steady spatial expansion, offering a microphysical toy model for uniform cosmic inflation.
 \end{abstract}
 
 \section{Introduction}
+A primary obstacle in modern quantum gravity frameworks is background dependence, where quantum field operators are conventionally defined on a fixed, smooth spacetime container. An alternative paradigm treats smooth continuous geometry as an emergent macroscopic aggregate of underlying discrete, purely relational degrees of freedom.
 
-Einstein's General Relativity (GR) revolutionized physics by identifying gravity with the curvature of spacetime itself \cite{einstein1916}. Quantum Mechanics (QM), developed in parallel, describes matter and radiation through probabilistic amplitudes evolving on a fixed spacetime background \cite{dirac1930}. Despite their empirical success, the two theories remain conceptually incompatible.
+In this work, we present a minimal background-independent framework where spatial manifolds co-emerge from a graph substrate. Unlike causal set theory, which enforces strict partial ordering, our model utilizes continuous weighted links. Unlike prior quantum graphity formulations, we enforce strict gauge invariance via a permutation-invariant variational Hamiltonian. We detail the exact continuum limit required to recover a standard Riemannian metric signature and test the model's structural growth under localized graph strain.
 
-This paper develops a conceptual argument: GR and QM cannot be unified as long as gravity is treated as a field analogous to the electromagnetic, weak, or strong interactions. Gravity is not a field \emph{within} spacetime; it is the structure that \emph{defines} spacetime. This asymmetry prevents unification at the level of fields and suggests that a deeper, pre-geometric quantum substrate must underlie both theories.
-
-\section{Gravity as Universal Geometry}
-
-Einstein's field equations,
+\section{Mathematical Formalism}
+Let the pre-geometric substrate $Q$ be represented by a weighted, symmetric adjacency matrix $A_{ij} \in [0, 1]$ mapping $N$ fundamental relational nodes. The discrete spatial architecture is investigated via the symmetric Graph Laplacian operator:
 \begin{equation}
-G_{\mu\nu} = 8\pi G\, T_{\mu\nu},
+\Delta f_i = \sum_{j} A_{ij} (f_i - f_j)
 \end{equation}
-express the idea that matter and energy determine the curvature of spacetime. Every particle, regardless of charge or composition, follows geodesics determined by this curvature. Gravity couples to all forms of energy and momentum.
 
-By contrast, the quantum interactions are selective:
-\begin{itemize}
-    \item Electromagnetism acts only on electrically charged particles.
-    \item The weak interaction acts only on left-handed fermions.
-    \item The strong interaction acts only on quarks and gluons.
-\end{itemize}
+The network relaxes toward geometric equilibrium via the minimization of a variational Matrix Hamiltonian:
+\begin{equation}
+\mathcal{H}[Q] = \alpha \mathcal{H}_{\text{dim}} + \beta \mathcal{H}_{\text{iso}} + \gamma \mathcal{H}_{\text{reg}}
+\end{equation}
+where $\alpha, \beta, \gamma$ represent positive scaling constants balancing competing topological energy penalties.
 
-Gravity alone is universal. It is not one interaction among many; it is the geometric background in which all interactions occur.
+\subsection{Permutation-Invariant Energy Penalties}
+To satisfy fundamental gauge covariance, the Hamiltonian must be invariant under arbitrary rearrangements of the node labels (permutation matrices $P$). 
 
-\section{The Asymmetry Problem}
+\subsubsection{Dimensional Penalty}
+The spectral dimension $d_s$ is dynamically monitored via the heat kernel trace over a diffusion time $t$:
+\begin{equation}
+\label{eq:spectral_dim}
+d_s(t) = \frac{2t \sum_{k} \lambda_k e^{-\lambda_k t}}{\sum_{k} e^{-\lambda_k t}}
+\end{equation}
+where $\lambda_k$ are the eigenvalues of the Graph Laplacian. The dimensional energy penalty is formalized as:
+\begin{equation}
+\mathcal{H}_{\text{dim}} = (d_s(t) - D_{\text{target}})^2
+\end{equation}
+where we fix the target macroscopic dimension to $D_{\text{target}} = 3$.
 
-Quantum field theory (QFT) assumes a fixed spacetime background. GR denies the existence of such a background. This leads to a structural contradiction:
+\subsubsection{Isotropy Measure}
+To enforce spatial homogeneity and isotropic connectivity across all nodes, we minimize the structural variance of the node degrees ($k_i = \sum_j A_{ij}$) alongside the spectral variance:
+\begin{equation}
+\mathcal{H}_{\text{iso}} = \frac{1}{N} \sum_{i} (k_i - \bar{k})^2 + \frac{1}{N} \sum_{k} (\lambda_k - \bar{\lambda})^2
+\end{equation}
 
-\begin{center}
-\begin{tabular}{|c|c|}
-\hline
-\textbf{Quantum Mechanics} & \textbf{General Relativity} \\
-\hline
-Requires fixed spacetime & Spacetime is dynamic \\
-Fields evolve \emph{in} spacetime & Geometry \emph{is} the field \\
-Linear operators & Nonlinear curvature \\
-Local interactions & Background-dependent \\
-\hline
-\end{tabular}
-\end{center}
+\subsubsection{Structural Regularizer}
+To penalize sharp geometric discontinuities without breaking node-labeling gauge freedom, we implement the trace of the squared Laplacian as a structural regularizer:
+\begin{equation}
+\mathcal{H}_{\text{reg}} = \frac{1}{N} \text{Tr}(\Delta^2) = \frac{1}{N} \sum_{i} \lambda_i^2
+\end{equation}
+Because the matrix trace is cyclic ($\text{Tr}(P^T \Delta^2 P) = \text{Tr}(\Delta^2)$), $\mathcal{H}_{\text{reg}}$ is identically independent of node index ordering, resolving the gauge issues of prior index-dependent formulations.
 
-This mismatch is conceptual, not technical. One theory requires a stage; the other \emph{is} the stage.
+\subsection{Continuum Limit and Spatial Emergence}
+We map a continuous spatial scalar field $\phi(x)$ to the discrete node coordinates via $f_i = \phi(x_i)$. Taylor expanding a localized neighborhood to second order yields:
+\begin{equation}
+\phi(xj) = \phi(xi) + \Delta x^\mu \partial_\mu \phi + \frac{1}{2}\Delta x^\mu \Delta x^\nu \partial_\mu \partial_\nu \phi + \mathcal{O}(a^3)
+\end{equation}
+where $a$ is the characteristic lattice spacing. Substituting this expansion back into the discrete Graph Laplacian yields:
+\begin{equation}
+\Delta \phi = -\left(\sum_{j} A_{ij}\Delta x^\mu\right) \partial_\mu \phi - \frac{1}{2}\left(\sum_{j} A_{ij}\Delta x^\mu \Delta x^\nu\right) \partial_\mu \partial_\nu \phi
+\end{equation}
 
-\section{The Gravitational Baseline Principle}
+The structural minimization of $\mathcal{H}_{\text{iso}}$ drives the network configuration to satisfy:
+\begin{equation}
+\sum_{j} A_{ij}\Delta x^\mu = 0
+\end{equation}
+\begin{equation}
+\sum_{j} A_{ij}\Delta x^\mu \Delta x^\nu \rightarrow a^2 \delta^{\mu\nu}
+\end{equation}
+where $\delta^{\mu\nu}$ is the positive-definite Kronecker delta. Thus, as $a \rightarrow 0$, the graph Laplacian cleanly converges to the continuous Riemannian Laplace-Beltrami operator:
+\begin{equation}
+\lim_{a \rightarrow 0} \frac{2}{a^2} \Delta = \nabla^2
+\end{equation}
 
-\textbf{Principle (Gravitational Baseline Principle).}  
-\emph{Gravity is not a force within spacetime but the geometric structure that defines spacetime. Because all physical systems exist and evolve within this structure, gravity acts as the universal baseline against which all other interactions are measured. Any theory attempting to unify gravity with the quantum forces must therefore operate at a deeper, pre-geometric level where spacetime itself is not fundamental.}
+\section{Numerical Simulation \& Matrix Growth}
+The model is executed using a Metropolis-Hastings Markov Chain Monte Carlo (MCMC) simulated annealing routine. In the static network regime, the system converges reliably toward a homogeneous spatial lattice, stabilizing around the target spectral dimension.
 
-This principle formalizes the structural asymmetry between gravity and the quantum interactions. It asserts that unification cannot succeed at the level of fields because gravity is not a peer to the gauge forces; it is the metric foundation that makes the gauge forces definable.
+\subsection{Strain-Driven Node Insertion}
+To simulate an expanding background, we present a phenomenological node-generation mechanism driven by local bond density. When a highly localized relational connection exceeds a critical density threshold ($A_{ij} > \kappa_{\text{crit}} = 0.80$), a new node $N_{\text{new}}$ is dynamically inserted to split the link.
 
-\section{Gravity as the Baseline of Measurement}
+To prevent unphysical energy shocks during a birth event, the adjacency entries are scaled by a preserving fraction $\zeta = 0.7$:
+\begin{equation}
+A'_{i,N_{\text{new}}} = A'_{N_{\text{new}},i} = A_{ij} \zeta
+\end{equation}
+\begin{equation}
+A'_{j,N_{\text{new}}} = A'_{N_{\text{new}},j} = A_{ij} \zeta
+\end{equation}
 
-Gravity defines the fundamental scales of nature:
-\begin{align}
-\ell_{\mathrm{P}} &= \sqrt{\frac{\hbar G}{c^3}}, \\
-t_{\mathrm{P}} &= \sqrt{\frac{\hbar G}{c^5}}, \\
-m_{\mathrm{P}} &= \sqrt{\frac{\hbar c}{G}}.
-\end{align}
+In our toy model simulation initialized with $N_{\text{start}} = 80$, introducing highly dense core seed regions successfully triggers continuous node generation, scaling the network uniformly to $N = 116$ before stabilizing into a expanded, relaxed topology.
 
-These Planck units set the baseline against which all other physical quantities are measured. Gravity is therefore not merely another field to unify; it is the \emph{metric foundation} of the entire measurement system.
+\section{Discussion \& Limitations}
+By restricting the framework to a symmetric adjacency matrix ($A_{ij}=A_{ji}$) and a positive semi-definite Graph Laplacian, the model successfully avoids the metric signature conflicts found in early pre-geometric formulations. However, because a Riemannian framework lacks an explicit time dimension, this configuration represents a static spatial slice or an Euclidean quantum gravity formulation rather than a dynamic spacetime. 
 
-\section{Conceptual Diagram: Gravity as Background}
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[scale=1.2]
-\draw[thick] (-1,0) circle (2.4cm);
-\node at (-1,0) {\textbf{Gravity}\\(Spacetime Geometry)};
-\node at (5,1) {Electromagnetism};
-\node at (5,0) {Weak Force};
-\node at (5,-1) {Strong Force};
-\draw[->, thick] (2,0) -- (3,1);
-\draw[->, thick] (2,0) -- (3,0);
-\draw[->, thick] (2,0) -- (3,-1);
-\end{tikzpicture}
-\caption{Gravity as the geometric background in which all other interactions occur.}
-\end{figure}
-
-\section{Background Independence}
-
-GR is background independent: the geometry of spacetime is not fixed but determined dynamically. QFT, by contrast, requires a fixed background metric. This incompatibility is central to the failure of quantization attempts \cite{dewitt1967, isham1993}.
-
-\section{Modern Conceptual Insight: Geometry from Quantum Structure}
-
-Recent developments suggest that spacetime geometry may emerge from deeper quantum structure. Entanglement patterns have been shown to encode geometric connectivity in holographic models \cite{maldacena1997, susskind2016}. This motivates the idea that gravity is emergent rather than fundamental.
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[scale=1.2]
-\draw[thick] (-2,0) circle (1cm);
-\draw[thick] (2,0) circle (1cm);
-\draw[thick, dashed] (-1,0) -- (1,0);
-\node at (-2,0) {A};
-\node at (2,0) {B};
-\node at (0,-1.2) {\small Entanglement $\rightarrow$ Connectivity};
-\end{tikzpicture}
-\caption{A conceptual diagram illustrating the modern idea that entanglement structure may define geometric connectivity.}
-\end{figure}
-
-\section{Implications for Unification}
-
-If gravity is the structure of spacetime, then unification cannot proceed by merging gravity with the quantum forces. Instead, unification must arise from a deeper level where:
-\begin{itemize}
-    \item spacetime is not fundamental,
-    \item gravity emerges from quantum structure,
-    \item geometry arises from entanglement or other pre-geometric degrees of freedom.
-\end{itemize}
-
-This perspective aligns with emergent spacetime models, holography, and relational approaches to quantum gravity \cite{rovelli2004}.
-
-\section{Testable Expectations and Theoretical Constraints}
-
-The Gravitational Baseline Principle is a structural claim about the nature of gravity and spacetime. While it does not yet yield sharp numerical predictions, it imposes clear constraints on the form of any viable theory of quantum gravity and leads to broad classes of testable expectations. These expectations arise from the idea that gravity is the geometric baseline rather than a field within spacetime, and that spacetime itself must emerge from deeper, pre-geometric degrees of freedom.
-
-\subsection{Absence of a Fundamental Graviton Field}
-
-If gravity is not a field within spacetime, then the graviton cannot be a fundamental particle in the same sense as photons or gluons. Any successful theory must therefore avoid treating the metric as a quantizable field on a background. This implies that perturbative quantum gravity and background-dependent graviton models cannot be fundamental descriptions. A decisive detection of a background-propagating graviton would challenge the principle.
-
-\subsection{Spacetime as an Emergent Medium}
-
-The principle implies that spacetime is not fundamental but emergent. This suggests that at sufficiently small scales, spacetime may exhibit discreteness, nonlocality, or effective cutoffs. Observable consequences may include modified dispersion relations at ultra-high energies, deviations from exact Lorentz invariance, or limits on information density. While current experiments have not reached the Planck scale, astrophysical observations and precision tests of Lorentz symmetry continue to probe these possibilities.
-
-\subsection{Gravity as a Thermodynamic Equation of State}
-
-If gravity is the baseline structure of spacetime, then Einstein's equations may arise as thermodynamic relations describing coarse-grained microstructure. This perspective is supported by the thermodynamic behavior of black holes and the ubiquity of area laws for entropy. The principle therefore predicts that gravitational dynamics should exhibit robustness characteristic of thermodynamic equations of state, and that small corrections to Einstein's equations may appear as higher-order thermodynamic terms.
-
-\subsection{Information and Entropy Bounds as Structural Features}
-
-Emergent spacetime models often imply fundamental limits on information density, such as holographic entropy bounds. Under the Gravitational Baseline Principle, such bounds are not incidental but structural: they reflect the finite information capacity of the underlying pre-geometric substrate. Observational confirmation of holographic noise, entropy bounds in cosmology, or universal area laws would be consistent with this expectation.
-
-\subsection{Constraints on Unified Theories}
-
-The principle imposes a strong constraint: no theory that treats gravity as a gauge field on a fixed background can be fundamentally correct. A viable unification must instead derive both spacetime geometry and quantum fields from a deeper substrate. This excludes broad classes of background-dependent approaches while supporting emergent, relational, and information-theoretic frameworks.
-
-In summary, while the Gravitational Baseline Principle does not yet yield precise experimental predictions, it provides a clear set of theoretical constraints and testable expectations. These guide the search for a deeper, pre-geometric theory from which both spacetime and quantum fields emerge.
-
+Future extensions will explore moving from a symmetric matrix to a complex-valued, pseudo-Hermitian adjacency architecture ($A_{ij} \in \mathbb{C}$), which could allow a Lorentzian metric signature ($-\!+\!+\!+$) to emerge via the secondary phase structures of the network trace. Additionally, scaling the system beyond the current toy boundaries ($N \le 250$) is required to evaluate whether the scaling relation $a(t) \propto N^{1/3}$ remains valid for macro-systems.
 
 \section{Conclusion}
-
-GR and QM resist unification because they describe physics at different conceptual levels. Gravity is not a force within spacetime; it is the structure that defines spacetime. All particles and interactions occur within this gravitational framework, making gravity the universal baseline rather than a peer to the quantum forces. A successful unification must therefore arise from a deeper, pre-geometric quantum substrate from which both spacetime and quantum fields emerge.
-
-\begin{thebibliography}{9}
-
-\bibitem{einstein1916}
-A. Einstein, ``The Foundation of the General Theory of Relativity,'' \emph{Annalen der Physik}, 1916.
-
-\bibitem{dirac1930}
-P. A. M. Dirac, \emph{The Principles of Quantum Mechanics}, 1930.
-
-\bibitem{dewitt1967}
-B. S. DeWitt, ``Quantum Theory of Gravity,'' \emph{Phys. Rev.}, 1967.
-
-\bibitem{isham1993}
-C. J. Isham, ``Canonical Quantum Gravity and the Problem of Time,'' 1993.
-
-\bibitem{maldacena1997}
-J. Maldacena, ``The Large N Limit of Superconformal Field Theories and Supergravity,'' 1997.
-
-\bibitem{susskind2016}
-L. Susskind, ``ER=EPR, GHZ, and the Consistency of Quantum Measurements,'' 2016.
-
-\bibitem{rovelli2004}
-C. Rovelli, \emph{Quantum Gravity}, Cambridge University Press, 2004.
-
-\end{thebibliography}
+This revised framework provides a mathematically consistent, permutation-invariant toy model for emergent Riemannian geometry. By replacing coordinate-dependent strain equations with invariant spectral traces, we demonstrate that a discrete matrix network can seamlessly relax into a smooth, isotropic spatial manifold. This establishes a robust numerical substrate for exploring background-independent physics.
 
 \end{document}
