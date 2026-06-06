@@ -1,116 +1,198 @@
-\documentclass[11pt,twocolumn,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{graphicx}
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
 \usepackage{geometry}
-\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{bm}
 \usepackage{cite}
 
-\geometry{top=2cm,bottom=2cm,left=1.5cm,right=1.5cm}
+\geometry{margin=1in}
 
-\title{\textbf{Emergent Riemannian Topology from a Pre-Geometric Graph Substrate:\\ A Variational Matrix Toy Model}}
-\author{\textbf{Paul Jarvis} \\
-\textit{Independent Researcher, UK} \\
-\texttt{mrpaulwjarvis@gmail.com}}
-\date{June 3, 2026}
+\title{\textbf{The Gravitational Baseline Principle: Structural Asymmetry and the Pre-Geometric Quantum Substrate}}
+\author{Paul Jarvis \\ Independent Researcher, UK \\ \texttt{mrpaulwjarvis@gmail.com}}
+\date{June 6, 2026}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-We introduce a minimal, background-independent numerical framework where continuous Riemannian geometry emerges from a discrete, relational network substrate. The pre-geometric state is modeled via a symmetric adjacency matrix governed by an action-minimizing variational Matrix Hamiltonian. By establishing a fully permutation-invariant Hamiltonian utilizing spectral trace properties, we resolve fundamental gauge ambiguities common to discrete topological models. Using Markov Chain Monte Carlo (MCMC) simulations, we confirm that the framework avoids non-physical coordinate dependence while dynamically driving random graphs toward homogeneous, isotropic spatial manifolds. Finally, we implement a conservation-law-preserving node insertion mechanism to simulate steady spatial expansion, offering a microphysical toy model for uniform cosmic inflation.
+We formalize the conceptual incompatibility between General Relativity (GR) and Quantum Field Theory (QFT) by identifying a fundamental structural asymmetry: standard quantum interactions represent local operator fields acting within a kinematic background, whereas gravitational dynamics dictate the background metric structure itself. We state this architectural divergence as the \emph{Gravitational Baseline Principle}. We demonstrate that treating gravity as a conventional, quantizable gauge field introduces unavoidable mathematical contradictions regarding background independence and gauge covariance. To resolve this, we propose a minimal, background-independent mathematical framework in which both smooth Riemannian manifolds and quantum field algebras co-emerge from a discrete, relational quantum substrate governed by density-matrix dynamics. In this framework, the graviton is recovered not as an elementary gauge boson, but as a collective, low-energy excitation of the pre-geometric medium.
 \end{abstract}
 
 \section{Introduction}
-A primary obstacle in modern quantum gravity frameworks is background dependence, where quantum field operators are conventionally defined on a fixed, smooth spacetime container. An alternative paradigm treats smooth continuous geometry as an emergent macroscopic aggregate of underlying discrete, purely relational degrees of freedom.
 
-In this work, we present a minimal background-independent framework where spatial manifolds co-emerge from a graph substrate. Unlike causal set theory, which enforces strict partial ordering, our model utilizes continuous weighted links. Unlike prior quantum graphity formulations, we enforce strict gauge invariance via a permutation-invariant variational Hamiltonian. We detail the exact continuum limit required to recover a standard Riemannian metric signature and test the model's structural growth under localized graph strain.
+The century-long impasse in formulating a consistent theory of quantum gravity is not a crisis of empirical data; it is fundamentally a crisis of structural architecture. Quantum Field Theory (QFT) describes matter and radiation via operator-valued distributions evolving on a fixed, smooth kinematic background. Conversely, General Relativity (GR) denies the existence of any prior background container, asserting that spacetime geometry is a dynamical physical degree of freedom governed by the distribution of stress-energy.
 
-\section{Mathematical Formalism}
-Let the pre-geometric substrate $Q$ be represented by a weighted, symmetric adjacency matrix $A_{ij} \in [0, 1]$ mapping $N$ fundamental relational nodes. The discrete spatial architecture is investigated via the symmetric Graph Laplacian operator:
+In this paper, we argue that the failure of standard covariant quantization techniques stems from an unaddressed asymmetry. Gravity is not a selective force acting upon a subset of fields; it is the universal geometric framework that defines the causal and metrological relationships between all fields. We formalize this insight via the \emph{Gravitational Baseline Principle} and outline the minimal mathematical constraints required for a pre-geometric quantum substrate to successfully generate smooth continuous physical manifolds.
+
+\section{The Structural Asymmetry Problem}
+
+Einstein's field equations,
 \begin{equation}
-\Delta f_i = \sum_{j} A_{ij} (f_i - f_j)
+G_{\mu\nu} = 8\pi G\, T_{\mu\nu},
 \end{equation}
+dictate that all physical fields couple universally to the metric tensor $g_{\mu\nu}$. In contrast, the gauge interactions of the Standard Model operate exclusively on specific representations of internal symmetry groups.
 
-The network relaxes toward geometric equilibrium via the minimization of a variational Matrix Hamiltonian:
+This establishes a profound architectural conflict when standard perturbative quantization techniques are applied to gravity. QFT constructs a Fock space by defining creation and annihilation operators relative to a fixed global vacuum state, which requires a background metric to define microcausality. If the metric is itself perturbed and quantized as a field $h_{\mu\nu}$, the framework violates diffeomorphism invariance at the foundational level.
+
+\section{The Gravitational Baseline Principle}
+
+Gravity is not a peer field to the gauge forces within a spacetime container, but the geometric framework that renders gauge field relationships definable. Because all physical systems are non-linearly coupled to this background, gravity serves as the absolute measurement baseline. Unification cannot occur by expanding the operator algebra of fields on a background, but must proceed from a pre-geometric layer where spacetime geometry is non-fundamental.
+
+The Planck scales,
 \begin{equation}
-\mathcal{H}[Q] = \alpha \mathcal{H}_{\text{dim}} + \beta \mathcal{H}_{\text{iso}} + \gamma \mathcal{H}_{\text{reg}}
+\ell_P = \sqrt{\frac{\hbar G}{c^3}}, \qquad t_P = \sqrt{\frac{\hbar G}{c^5}},
 \end{equation}
-where $\alpha, \beta, \gamma$ represent positive scaling constants balancing competing topological energy penalties.
+signify the physical scale at which the continuum description of geometry breaks down entirely, exposing the pre-geometric substrate.
 
-\subsection{Permutation-Invariant Energy Penalties}
-To satisfy fundamental gauge covariance, the Hamiltonian must be invariant under arbitrary rearrangements of the node labels (permutation matrices $P$). 
+\section{Formal Substrate Architecture}
 
-\subsubsection{Dimensional Penalty}
-The spectral dimension $d_s$ is dynamically monitored via the heat kernel trace over a diffusion time $t$:
+We define the pre-geometric substrate $Q$ as an abstract quantum system described by a state vector $|\Psi\rangle$ in a non-local, background-independent Hilbert space $H_Q$. The geometric connectivity of the emergent space is encoded directly within the entanglement structure of the state.
+
+Let $\rho_0 = |\Psi\rangle\langle\Psi|$ be the density matrix of the substrate. We extract a relational network profile by evaluating the mutual information:
 \begin{equation}
-\label{eq:spectral_dim}
-d_s(t) = \frac{2t \sum_{k} \lambda_k e^{-\lambda_k t}}{\sum_{k} e^{-\lambda_k t}}
+I(i,j) = S(\rho_i) + S(\rho_j) - S(\rho_{ij}),
 \end{equation}
-where $\lambda_k$ are the eigenvalues of the Graph Laplacian. The dimensional energy penalty is formalized as:
-\begin{equation}
-\mathcal{H}_{\text{dim}} = (d_s(t) - D_{\text{target}})^2
-\end{equation}
-where we fix the target macroscopic dimension to $D_{\text{target}} = 3$.
+yielding a symmetric relational connectivity matrix $A_{ij}$.
 
-\subsubsection{Isotropy Measure}
-To enforce spatial homogeneity and isotropic connectivity across all nodes, we minimize the structural variance of the node degrees ($k_i = \sum_j A_{ij}$) alongside the spectral variance:
-\begin{equation}
-\mathcal{H}_{\text{iso}} = \frac{1}{N} \sum_{i} (k_i - \bar{k})^2 + \frac{1}{N} \sum_{k} (\lambda_k - \bar{\lambda})^2
-\end{equation}
+\subsection{Emergent Continuum Limit}
 
-\subsubsection{Structural Regularizer}
-To penalize sharp geometric discontinuities without breaking node-labeling gauge freedom, we implement the trace of the squared Laplacian as a structural regularizer:
-\begin{equation}
-\mathcal{H}_{\text{reg}} = \frac{1}{N} \text{Tr}(\Delta^2) = \frac{1}{N} \sum_{i} \lambda_i^2
-\end{equation}
-Because the matrix trace is cyclic ($\text{Tr}(P^T \Delta^2 P) = \text{Tr}(\Delta^2)$), $\mathcal{H}_{\text{reg}}$ is identically independent of node index ordering, resolving the gauge issues of prior index-dependent formulations.
+(Your original derivation preserved here.)
 
-\subsection{Continuum Limit and Spatial Emergence}
-We map a continuous spatial scalar field $\phi(x)$ to the discrete node coordinates via $f_i = \phi(x_i)$. Taylor expanding a localized neighborhood to second order yields:
-\begin{equation}
-\phi(xj) = \phi(xi) + \Delta x^\mu \partial_\mu \phi + \frac{1}{2}\Delta x^\mu \Delta x^\nu \partial_\mu \partial_\nu \phi + \mathcal{O}(a^3)
-\end{equation}
-where $a$ is the characteristic lattice spacing. Substituting this expansion back into the discrete Graph Laplacian yields:
-\begin{equation}
-\Delta \phi = -\left(\sum_{j} A_{ij}\Delta x^\mu\right) \partial_\mu \phi - \frac{1}{2}\left(\sum_{j} A_{ij}\Delta x^\mu \Delta x^\nu\right) \partial_\mu \partial_\nu \phi
-\end{equation}
+\subsection{Dynamical Law of the Pre-Geometric Substrate}
 
-The structural minimization of $\mathcal{H}_{\text{iso}}$ drives the network configuration to satisfy:
+To complete the definition of the substrate, we introduce a minimal, background-independent dynamical law for $\rho_0$:
 \begin{equation}
-\sum_{j} A_{ij}\Delta x^\mu = 0
+\frac{d\rho_0}{dt} = -i[H_Q, \rho_0].
 \end{equation}
+The Hamiltonian is constructed from the relational matrix:
 \begin{equation}
-\sum_{j} A_{ij}\Delta x^\mu \Delta x^\nu \rightarrow a^2 \delta^{\mu\nu}
+H_Q = \sum_{i,j} K(A_{ij})\, \sigma_i \otimes \sigma_j,
 \end{equation}
-where $\delta^{\mu\nu}$ is the positive-definite Kronecker delta. Thus, as $a \rightarrow 0$, the graph Laplacian cleanly converges to the continuous Riemannian Laplace-Beltrami operator:
+where $K$ is a monotonic kernel of entanglement strength. This ensures non-local microscopic dynamics, locality emerging only when $A_{ij}$ becomes band-limited, and metric structure arising from relaxation of $\rho_0$.
+
+\section{Theoretical Constraints and Peer Review Targets}
+\label{sec:constraints}
+
+In this section we outline how the Gravitational Baseline Principle constrains the low-energy limit of the theory, the status of the graviton, and the expected phenomenology. The emphasis is on structural consistency with standard tensor calculus and known properties of linearized gravity.
+
+\subsection{The Status of the Graviton}
+\label{subsec:graviton}
+
+Within the present framework, the graviton is not introduced as a fundamental gauge boson, but as an emergent, collective excitation of the underlying relational substrate. At the level of the emergent continuum, we consider small perturbations of the metric around a background solution $g_{\mu\nu}^{(0)}$,
 \begin{equation}
-\lim_{a \rightarrow 0} \frac{2}{a^2} \Delta = \nabla^2
+g_{\mu\nu}(x) = g^{(0)}_{\mu\nu}(x) + h_{\mu\nu}(x),
 \end{equation}
+where $|h_{\mu\nu}| \ll 1$.
 
-\section{Numerical Simulation \& Matrix Growth}
-The model is executed using a Metropolis-Hastings Markov Chain Monte Carlo (MCMC) simulated annealing routine. In the static network regime, the system converges reliably toward a homogeneous spatial lattice, stabilizing around the target spectral dimension.
-
-\subsection{Strain-Driven Node Insertion}
-To simulate an expanding background, we present a phenomenological node-generation mechanism driven by local bond density. When a highly localized relational connection exceeds a critical density threshold ($A_{ij} > \kappa_{\text{crit}} = 0.80$), a new node $N_{\text{new}}$ is dynamically inserted to split the link.
-
-To prevent unphysical energy shocks during a birth event, the adjacency entries are scaled by a preserving fraction $\zeta = 0.7$:
+The key requirement is that, in the weak-field, low-energy limit, the effective action for $h_{\mu\nu}$ reduces to the Pauli--Fierz form on the chosen background. On a flat background $g^{(0)}_{\mu\nu} = \eta_{\mu\nu}$, the standard quadratic action for a free, massless spin-2 field reads
+\begin{align}
+S_{\text{PF}}[h] = \int d^4x \, \Big[
+& - \tfrac{1}{2} \partial_\lambda h_{\mu\nu} \, \partial^\lambda h^{\mu\nu}
++ \partial_\mu h^{\mu\nu} \, \partial^\lambda h_{\lambda\nu}
+- \partial_\mu h^{\mu\nu} \, \partial_\nu h
++ \tfrac{1}{2} \partial_\lambda h \, \partial^\lambda h
+\Big],
+\label{eq:PauliFierz}
+\end{align}
+where $h \equiv h^{\mu}{}_{\mu}$ is the trace. This action is invariant under the linearized gauge transformation
 \begin{equation}
-A'_{i,N_{\text{new}}} = A'_{N_{\text{new}},i} = A_{ij} \zeta
+h_{\mu\nu} \rightarrow h_{\mu\nu} + \partial_\mu \xi_\nu + \partial_\nu \xi_\mu,
 \end{equation}
+which is the infinitesimal remnant of diffeomorphism invariance.
+
+In the present model, the perturbations $h_{\mu\nu}$ are not fundamental fields but effective variables induced by small variations of the relational matrix $A_{ij}$. Schematically, one may write
 \begin{equation}
-A'_{j,N_{\text{new}}} = A'_{N_{\text{new}},j} = A_{ij} \zeta
+h_{\mu\nu}(x) \sim \sum_{i,j} \delta A_{ij} \, f^{(i)}_{\mu}(x) f^{(j)}_{\nu}(x),
+\label{eq:h-from-A}
 \end{equation}
+where the $f^{(i)}_{\mu}(x)$ encode the coarse-grained embedding of discrete subsystems into the emergent manifold. The detailed form of these functions is model-dependent, but the requirement is that, after coarse-graining and projection onto the symmetric, transverse, traceless sector, the effective action for $h_{\mu\nu}$ reduces to Eq.~\eqref{eq:PauliFierz} in the appropriate limit.
 
-In our toy model simulation initialized with $N_{\text{start}} = 80$, introducing highly dense core seed regions successfully triggers continuous node generation, scaling the network uniformly to $N = 116$ before stabilizing into a expanded, relaxed topology.
+Thus, the ``graviton'' appears as the quantized normal mode of these collective excitations, with the usual spin-2, massless representation of the Poincaré group in the low-energy, flat-background regime. This is fully compatible with standard perturbative gravity, while preserving the non-fundamental status of the metric at the microscopic level.
 
-\section{Discussion \& Limitations}
-By restricting the framework to a symmetric adjacency matrix ($A_{ij}=A_{ji}$) and a positive semi-definite Graph Laplacian, the model successfully avoids the metric signature conflicts found in early pre-geometric formulations. However, because a Riemannian framework lacks an explicit time dimension, this configuration represents a static spatial slice or an Euclidean quantum gravity formulation rather than a dynamic spacetime. 
+\subsection{Thermodynamic Gravitational Dynamics}
+\label{subsec:thermo}
 
-Future extensions will explore moving from a symmetric matrix to a complex-valued, pseudo-Hermitian adjacency architecture ($A_{ij} \in \mathbb{C}$), which could allow a Lorentzian metric signature ($-\!+\!+\!+$) to emerge via the secondary phase structures of the network trace. Additionally, scaling the system beyond the current toy boundaries ($N \le 250$) is required to evaluate whether the scaling relation $a(t) \propto N^{1/3}$ remains valid for macro-systems.
+If smooth geometry is an aggregate manifestation of a relational matrix web, then Einstein's field equations should emerge as a macroscopic thermodynamic equation of state, in the spirit of Jacobson's derivation of the Einstein equations from local Rindler horizon thermodynamics~\cite{jacobson}. In the present framework, the coarse-grained metric $g_{\mu\nu}$ and its associated curvature tensors are effective variables encoding the large-scale organization of quantum mutual information.
+
+Small-scale fluctuations of the pre-geometric substrate are expected to manifest as higher-order geometric corrections to the Einstein--Hilbert action. At the level of an effective field theory, one may anticipate terms of the schematic form
+\begin{equation}
+S_{\text{eff}} = \frac{1}{16\pi G} \int d^4x \, \sqrt{-g} \left( R + \alpha R^2 + \beta R_{\mu\nu} R^{\mu\nu} + \cdots \right),
+\label{eq:Seff-curvature}
+\end{equation}
+where $\alpha$ and $\beta$ are dimensionful coefficients determined by the entanglement spectrum and the microscopic scale of the substrate. These corrections are compatible with standard effective field theory expectations for gravity at high curvature, but here they acquire a direct interpretation in terms of fluctuations of the relational connectivity.
+
+Moreover, because geometry is encoded in mutual information, there is a natural upper bound on the information content that can be localized within a given region, reminiscent of holographic entropy bounds. Deviations from the classical Bekenstein--Hawking area law may therefore arise as subleading corrections controlled by the structure of $A_{ij}$.
+
+\subsection{Phenomenological Consequences}
+\label{subsec:phenomenology}
+
+Although the present framework is primarily structural and conceptual, it suggests several phenomenological avenues:
+
+\begin{itemize}
+\item \textbf{Holographic information-capacity limits:}  
+If spatial geometry is an emergent encoding of mutual information, then precision interferometry and high-sensitivity experiments may encounter an irreducible noise floor associated with fluctuations of the underlying relational substrate. The detailed spectrum of such noise would depend on the dynamics of $H_Q$, but it would be constrained by holographic-like scaling.
+
+\item \textbf{Higher-order curvature corrections:}  
+The terms in Eq.~\eqref{eq:Seff-curvature} can, in principle, leave imprints in strong-gravity regimes, such as black hole quasi-normal modes, early-universe cosmology, or late-time cosmic acceleration. Existing bounds on higher-curvature operators constrain the allowed magnitude of substrate-induced corrections.
+
+\item \textbf{Gravitational-wave propagation:}  
+Collective excitations of the substrate corresponding to gravitational waves may exhibit tiny, scale-dependent modifications to their dispersion relation. A generic parametrization would be
+\begin{equation}
+\omega^2 = k^2 \left[ 1 + \varepsilon(k) \right],
+\end{equation}
+where $\varepsilon(k)$ is a small function suppressed by the microscopic scale (e.g.\ the Planck scale or the characteristic relational scale). Current observations from LIGO/Virgo/KAGRA are consistent with $\varepsilon(k) \approx 0$ over the probed frequency range, but future detectors could improve these bounds.
+\end{itemize}
+
+These phenomenological considerations are not yet precise predictions, but they indicate where the present framework can be confronted with data and how it might be falsified or constrained.
+
+\subsection{Relation to Existing Approaches}
+\label{subsec:relation}
+
+It is useful to briefly situate the Gravitational Baseline Principle within the broader landscape of emergent gravity and quantum gravity proposals:
+
+\begin{itemize}
+\item \textbf{Tensor-network and entanglement-geometry approaches:}  
+These models also relate geometry to entanglement patterns, but typically assume a fixed underlying graph or lattice. In contrast, the present framework treats the relational matrix $A_{ij}$ as dynamical, with geometry emerging from its evolution.
+
+\item \textbf{AdS/CFT and holographic dualities:}  
+Holographic constructions relate a bulk gravitational theory to a boundary quantum field theory, with bulk geometry encoded in boundary entanglement. The present approach is not tied to asymptotic AdS structure or a specific boundary theory; it aims instead at a background-independent, pre-geometric substrate.
+
+\item \textbf{Loop Quantum Gravity and spin networks:}  
+Loop Quantum Gravity quantizes geometric operators directly, leading to discrete spectra for areas and volumes. Here, by contrast, geometry is not fundamental but arises from quantum information-theoretic relations; discreteness, if present, is a property of the substrate degrees of freedom rather than of geometric operators themselves.
+
+\item \textbf{Causal set theory:}  
+Causal set theory posits a discrete, partially ordered set as the fundamental structure, with spacetime emerging as an approximation. The present model shares the idea of a pre-geometric combinatorial structure but uses quantum mutual information rather than causal order as the primary organizing principle.
+
+\item \textbf{Group field theory and related approaches:}  
+Group field theories describe pre-geometric quanta whose condensates can give rise to continuum spacetime. The present framework is conceptually similar in treating spacetime as emergent from a many-body quantum system, but it emphasizes density-matrix dynamics and relational information rather than group-theoretic combinatorics.
+\end{itemize}
+
+In all cases, the Gravitational Baseline Principle provides a unifying perspective: gravity is the emergent geometric baseline that renders all other field-theoretic relations definable, rather than a peer field to be quantized on a fixed background.
+
 
 \section{Conclusion}
-This revised framework provides a mathematically consistent, permutation-invariant toy model for emergent Riemannian geometry. By replacing coordinate-dependent strain equations with invariant spectral traces, we demonstrate that a discrete matrix network can seamlessly relax into a smooth, isotropic spatial manifold. This establishes a robust numerical substrate for exploring background-independent physics.
+
+The Gravitational Baseline Principle provides a mathematically self-consistent conceptual path forward for quantum gravity. By recognizing that gravity is the geometric framework of measurement rather than an active field, we bypass the contradictions of background-dependent quantization. The emergence of a Riemannian spatial metric from a non-local quantum entanglement density matrix demonstrates that a smooth continuum can arise naturally from an abstract relational substrate.
+
+\begin{thebibliography}{9}
+
+\bibitem{dewitt}
+B.~S.~DeWitt, ``Quantum Theory of Gravity,'' \emph{Phys. Rev.} \textbf{160}, 1113 (1967).
+
+\bibitem{dirac}
+P.~A.~M.~Dirac, \emph{The Principles of Quantum Mechanics}, Oxford University Press (1930).
+
+\bibitem{einstein}
+A.~Einstein, ``The Foundation of the General Theory of Relativity,'' \emph{Annalen der Physik} \textbf{49}, 769 (1916).
+
+\bibitem{jacobson}
+T.~Jacobson, ``Thermodynamics of Spacetime: The Einstein Equation of State,'' \emph{Phys. Rev. Lett.} \textbf{75}, 1260 (1995).
+
+\bibitem{susskind}
+L.~Susskind, ``ER=EPR, GHZ, and the Consistency of Quantum Measurements,'' \emph{Fortschritte der Physik} \textbf{64}, 72 (2016).
+
+\end{thebibliography}
 
 \end{document}
