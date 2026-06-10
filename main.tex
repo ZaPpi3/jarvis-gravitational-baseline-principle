@@ -1,115 +1,140 @@
-\documentclass[11pt,twocolumn,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsfonts}
-\usepackage{geometry}
-\usepackage{booktabs}
-\usepackage{cite}
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
 \usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
 
-\geometry{top=2cm,bottom=2cm,left=1.5cm,right=1.5cm}
-
-\title{\textbf{The Gravitational Baseline Principle:\\ Structural Asymmetry and the Pre-Geometric Quantum Substrate}}
-\author{\textbf{Paul Jarvis} \\
-\textit{Independent Researcher, UK} \\
-\texttt{mrpaulwjarvis@gmail.com}}
+\title{\textbf{The Gravitational Baseline Principle: Structural Asymmetry and the Pre-Geometric Quantum Substrate}}
+\author{
+\textbf{Paul Jarvis}\\
+Independent Researcher, UK\\
+ORCID: 0009-0009-8933-857X\\
+\texttt{mrpaulwjarvis@gmail.com}
+}
 \date{\today}
 
 \begin{document}
-
 \maketitle
 
 \begin{abstract}
-We formalize the conceptual incompatibility between General Relativity (GR) and Quantum Field Theory (QFT) by identifying a fundamental structural asymmetry: standard quantum interactions represent local operator fields acting within a kinematic background, whereas gravitational dynamics dictate the background metric structure itself. We state this architectural divergence as the \textit{Gravitational Baseline Principle}. We demonstrate that treating gravity as a conventional, quantizable gauge field introduces unavoidable mathematical contradictions regarding background independence and gauge covariance. To resolve this, we propose a minimal, background-independent mathematical framework in which both smooth Riemannian manifolds and quantum field algebras co-emerge from a discrete, relational quantum substrate governed by density-matrix dynamics. In this framework, the graviton is recovered not as an elementary gauge boson, but as a collective, low-energy excitation of the pre-geometric medium.
+We identify a fundamental structural asymmetry between General Relativity (GR) and Quantum Field Theory (QFT): quantum fields require a fixed kinematic background to define locality and operator algebra, whereas GR asserts that the background metric is itself a dynamical physical degree of freedom. We formalize this mismatch as the \emph{Gravitational Baseline Principle}, which states that gravity is not a peer interaction among fields but the universal geometric framework that renders all field-theoretic relations definable. Treating gravity as a conventional quantizable gauge field leads to contradictions in background independence and gauge covariance. To resolve this, we propose a minimal, background-independent quantum substrate from which both smooth manifolds and quantum field algebras co-emerge. Geometry arises from the entanglement structure of a relational density matrix, and the graviton appears as a collective, low-energy excitation of this substrate. We show how the Laplace--Beltrami operator, Einstein dynamics, and thermodynamic gravitational laws emerge in the continuum limit. This framework provides a conceptually coherent path toward unifying GR and QFT without quantizing the metric as a fundamental field.
 \end{abstract}
 
 \section{Introduction}
-Quantum Field Theory (QFT) describes matter and radiation via operator-valued distributions evolving on a fixed, smooth kinematic background \cite{Dirac1930}. General Relativity (GR), by contrast, denies the existence of any prior background container, asserting that spacetime geometry is a dynamical physical degree of freedom governed by the distribution of stress-energy \cite{Einstein1916}. This architectural mismatch underlies the century-long difficulty in formulating a consistent quantum theory of gravity \cite{DeWitt1967}.
+Quantum Field Theory (QFT) describes matter and radiation as operator-valued distributions defined on a fixed background spacetime \cite{Dirac1930}. Locality, microcausality, and the construction of a Fock space all require a predetermined metric structure. General Relativity (GR), by contrast, denies the existence of any prior geometric container: the metric itself is a dynamical field determined by the Einstein equations \cite{Einstein1916}. This architectural mismatch underlies the persistent difficulty in formulating a consistent quantum theory of gravity \cite{DeWitt1967}.
 
-Gravity is not a selective force acting upon a subset of fields; it is the universal geometric framework that defines causal and metrological relationships between all fields. We formalize this insight via the \textit{Gravitational Baseline Principle} and outline the minimal mathematical constraints required for a pre-geometric quantum substrate to generate smooth continuous physical manifolds.
+Gravity is universal: all physical systems couple to the metric tensor $g_{\mu\nu}$, which defines causal structure, measurement, and the very notion of locality. Gauge interactions, by contrast, act only on specific internal symmetry representations. This motivates the \emph{Gravitational Baseline Principle}: gravity is the universal geometric framework that renders all other interactions definable. It is not a peer field within a background but the background itself.
+
+In this paper, we develop a minimal pre-geometric quantum substrate from which smooth geometry and quantum fields co-emerge. The substrate is defined by a relational density matrix whose entanglement structure encodes emergent spatial connectivity. We show how the Laplace--Beltrami operator, graviton excitations, and thermodynamic gravitational dynamics arise in the continuum limit.
 
 \section{The Structural Asymmetry Problem}
 Einstein's field equations,
 \begin{equation}
-G_{\mu\nu} = 8\pi G T_{\mu\nu},
+G_{\mu\nu} = 8\pi G\, T_{\mu\nu},
 \end{equation}
-dictate that all physical fields couple universally to the metric tensor $g_{\mu\nu}$. In contrast, gauge interactions operate only on specific internal symmetry representations. Standard perturbative quantization techniques require a fixed background metric to define microcausality and construct a Fock space. If the metric is itself perturbed and quantized as $h_{\mu\nu}$, the framework violates diffeomorphism invariance at the foundational level.
+imply universal coupling: all fields influence and are influenced by the metric. Gauge interactions, however, operate only on specific internal degrees of freedom.
+
+Perturbative quantization of gravity requires expanding the metric as $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$ and quantizing $h_{\mu\nu}$ as a spin-2 gauge field. But this procedure presupposes a fixed background $\eta_{\mu\nu}$, violating diffeomorphism invariance at the foundational level. This is the core structural asymmetry: QFT requires a background; GR denies one.
 
 \section{The Gravitational Baseline Principle}
-Gravity is not a peer field to the gauge forces within a spacetime container, but the geometric framework that renders gauge field relationships definable. Because all physical systems couple non-linearly to this background, gravity serves as the absolute measurement baseline.
-The Planck scales,
+Gravity is not a selective interaction but the universal geometric baseline. All physical systems couple non-linearly to the metric, which defines causal structure and measurement. The Planck scales,
 \begin{equation}
-\ell_P = \sqrt{\frac{\hbar G}{c^3}}, \quad t_P = \sqrt{\frac{\hbar G}{c^5}},
+\ell_P = \sqrt{\frac{\hbar G}{c^3}}, \qquad t_P = \sqrt{\frac{\hbar G}{c^5}},
 \end{equation}
-mark the breakdown of the continuum description of geometry, exposing the pre-geometric substrate.
+mark the breakdown of smooth geometry and the onset of pre-geometric structure.
 
-\section{Formal Substrate Architecture}
-We define the pre-geometric substrate $Q$ as an abstract quantum system described by a state vector $|\Psi\rangle$ in a non-local, background-independent Hilbert space $H_Q$. The geometric connectivity of the emergent space is encoded in the entanglement structure of the state. Let $\rho_0 = |\Psi\rangle\langle\Psi|$ be the density matrix of the substrate. The mutual information
-\begin{equation}
-I(i, j) = S(\rho_i) + S(\rho_j) - S(\rho_{ij}),
-\end{equation}
-defines a symmetric relational connectivity matrix $A_{ij}$.
+The Gravitational Baseline Principle states:
+\begin{quote}
+\emph{Gravity is the universal geometric framework that renders all field-theoretic relations definable. It cannot be quantized as a conventional gauge field without violating background independence.}
+\end{quote}
 
-\subsection{Emergent Continuum Limit}
-To reconstruct a smooth Riemannian spatial manifold from the relational matrix $A_{ij}$, we examine the action of a discrete structural operator mapping the subsystems:
-\begin{equation}
-\Delta f_i = \sum_{j} A_{ij} (f_i - f_j)
-\end{equation}
-By mapping a smooth continuous test scalar field $\phi(x)$ to the discrete subsystem nodes via $f_i \equiv \phi(x_i)$ and evaluating a localized Taylor expansion, we obtain:
-\begin{equation}
-\Delta \phi = -\left(\sum_{j} A_{ij}\Delta x^\mu\right) \partial_\mu \phi - \frac{1}{2}\left(\sum_{j} A_{ij}\Delta x^\mu \Delta x^\nu\right) \partial_\mu \partial_\nu \phi
-\end{equation}
-Statistical relaxation of the substrate minimizes non-isotropic configurations, enforcing the constraints $\sum_{j} A_{ij}\Delta x^\mu = 0$ and $\sum_{j} A_{ij}\Delta x^\mu \Delta x^\nu \rightarrow a^2 \delta^{\mu\nu}$, where $\delta^{\mu\nu}$ is the emergent Riemannian metric tensor and $a$ is the relational scale length. Thus, the continuous spatial Laplace-Beltrami operator emerges cleanly as an expectation value: $\lim_{a \rightarrow 0} \frac{2}{a^2} \langle \Delta \rangle = \nabla^2$.
+\section{Pre-Geometric Substrate Architecture}
+We define the pre-geometric substrate $\mathcal{Q}$ as a background-independent quantum system with state vector $|\Psi\rangle$ in a Hilbert space $\mathcal{H}_{\mathcal{Q}}$. The density matrix $\rho = |\Psi\rangle\langle\Psi|$ encodes relational structure.
 
-\subsection{Dynamical Law of the Substrate}
-We introduce a minimal, background-independent dynamical law:
+Mutual information between subsystems $i$ and $j$,
 \begin{equation}
-\frac{d\rho_0}{dt} = -i[H_Q, \rho_0].
+I(i,j) = S(\rho_i) + S(\rho_j) - S(\rho_{ij}),
 \end{equation}
-The Hamiltonian is constructed from the relational matrix:
-\begin{equation}
-H_Q = \sum_{i,j} K(A_{ij}) \, \sigma_i \otimes \sigma_j,
-\end{equation}
-where $K$ is a monotonic kernel of entanglement strength and $\sigma_i$ represents localized operator algebras acting on the modular subsystems. We note that because $H_Q$ depends implicitly on the state $\rho_0$ via the mutual information matrix $A_{ij}$, Equation (6) represents a self-consistent, non-linear state evolution equation of the generalized Schrödinger-Newton type. This structure ensures non-local microscopic dynamics, with locality emerging only when $A_{ij}$ becomes band-limited.
+defines a symmetric connectivity matrix $A_{ij}$.
 
-\section{Theoretical Constraints}
-
-\subsection{The Status of the Graviton}
-We consider small perturbations of the emergent metric around a flat background solution: $g_{\mu\nu}(x) = \eta_{\mu\nu} + h_{\mu\nu}(x)$, with $|h_{\mu\nu}| \ll 1$. The Pauli--Fierz action for a free, massless spin-2 field is:
+\subsection{Emergent Continuum Geometry}
+A discrete structural operator acts on test functions $\phi(x)$ mapped to subsystem nodes:
 \begin{equation}
-S_{\text{PF}}[h] = \int d^4x \left[ -\frac{1}{2}\partial_\lambda h_{\mu\nu} \partial^\lambda h^{\mu\nu} + \partial_\mu h^{\mu\nu} \partial_\lambda h^\lambda_\nu - \partial_\mu h^{\mu\nu} \partial_\nu h + \frac{1}{2}\partial_\lambda h \partial^\lambda h \right]
+\Delta_\mathcal{Q} f_i = \sum_j A_{ij}(f_i - f_j).
 \end{equation}
-with $h = h^\mu_\mu$. In the present model, $h_{\mu\nu}$ arises from small variations of the relational matrix projected via smooth vector-valued coordinate projection functions $f^{(i)}_\mu(x)$ mapping the discrete nodes to the manifold:
+Expanding $\phi(x)$ in a Taylor series and imposing isotropy constraints yields the continuum Laplace--Beltrami operator:
 \begin{equation}
-h_{\mu\nu}(x) \sim \sum_{i,j} \delta A_{ij} \, \partial_\mu f^{(i)}(x) \, \partial_\nu f^{(j)}(x)
+\lim_{\alpha\to 0} \Delta_\mathcal{Q} = \nabla^2.
 \end{equation}
-After projection onto the symmetric, transverse, traceless sector, the effective action reduces to the Pauli--Fierz form, proving the graviton is a collective low-energy excitation.
 
-\subsection{Thermodynamic Gravitational Dynamics}
-Einstein's equations emerge as a thermodynamic equation of state \cite{Jacobson1995}. Fluctuations of the substrate generate higher-order curvature corrections:
+\subsection{Dynamical Law}
+We propose a minimal background-independent evolution equation:
 \begin{equation}
-S_{\text{eff}} = \frac{1}{16\pi G} \int d^4x \sqrt{-g} \left( R + \alpha R^2 + \beta R_{\mu\nu}R^{\mu\nu} + \dots \right)
+\frac{d\rho}{dt} = -i[H_\mathcal{Q}, \rho],
+\end{equation}
+with Hamiltonian
+\begin{equation}
+H_\mathcal{Q} = \sum_{i,j} K(A_{ij})\, \sigma_i \otimes \sigma_j,
+\end{equation}
+where $K$ is a monotonic kernel of entanglement strength. Because $A_{ij}$ depends on $\rho$, the evolution is self-consistent and non-linear.
+
+\section{Emergent Graviton Dynamics}
+Small perturbations of the emergent metric,
+\begin{equation}
+g_{\mu\nu}(x) = \eta_{\mu\nu} + h_{\mu\nu}(x),
+\end{equation}
+arise from variations in $A_{ij}$ projected onto smooth coordinate functions. After projection onto the transverse-traceless sector, the effective action reduces to the Pauli--Fierz form, demonstrating that the graviton is a collective excitation of the substrate.
+
+\section{Thermodynamic Gravity}
+Following Jacobson \cite{Jacobson1995}, Einstein's equations emerge as a thermodynamic equation of state. Fluctuations of the substrate generate higher-curvature corrections:
+\begin{equation}
+S_{\mathrm{eff}} = \frac{1}{16\pi G} \int d^4x \sqrt{-g}\left(R + \alpha R^2 + \beta R_{\mu\nu}R^{\mu\nu} + \cdots\right),
 \end{equation}
 with coefficients determined by the entanglement spectrum.
 
-\subsection{Phenomenological Consequences}
+\section{Phenomenological Consequences}
 \begin{itemize}
-    \item \textbf{Holographic limits:} Mutual-information encoding implies an irreducible noise floor in precision interferometry.
-    \item \textbf{Curvature corrections:} The higher-order terms in Eq. (10) may affect black hole quasi-normal modes or early-universe cosmology.
-    \item \textbf{Wave propagation:} Collective excitations exhibit modified dispersion: $\omega^2 = k^2[1 + \epsilon(k)]$, with $\epsilon(k)$ suppressed by the microscopic scale.
+\item \textbf{Holographic noise:} Mutual-information encoding implies an irreducible noise floor in precision interferometry.
+\item \textbf{Curvature corrections:} Higher-order terms may affect black hole quasi-normal modes and early-universe cosmology.
+\item \textbf{Modified dispersion:} Collective excitations satisfy $\omega^2 = k^2[1 + \epsilon(k)]$, with $\epsilon(k)$ suppressed by the microscopic scale.
 \end{itemize}
 
-\subsection{Relation to Existing Approaches}
-Unlike Loop Quantum Gravity or Causal Set Theory, which quantize classical geometric properties (areas or partial orders), this framework keeps geometry entirely emergent from pure, non-spatial quantum information states. It shares conceptual ground with the ER=EPR conjecture \cite{Susskind2016}, extending it to show that global spacetime geometry is an aggregate manifestation of sub-system entanglement profiles.
+\section{Relation to Existing Approaches}
+Unlike Loop Quantum Gravity or Causal Set Theory, which quantize classical geometric structures, this framework treats geometry as emergent from non-spatial quantum information. It shares conceptual ground with ER=EPR \cite{Susskind2016} and entanglement-induced geometry \cite{VanRaamsdonk2010}, but provides a concrete dynamical substrate.
+
+\section{Limitations and Outlook}
+This framework is conceptual and minimalistic. A full treatment requires:
+\begin{itemize}
+\item explicit reconstruction of Lorentzian signature,
+\item derivation of matter field algebras,
+\item analysis of renormalization behavior,
+\item numerical simulations of substrate dynamics.
+\end{itemize}
+Nonetheless, the model provides a coherent path toward unifying GR and QFT without quantizing the metric.
 
 \section{Conclusion}
-The Gravitational Baseline Principle provides a mathematically self-consistent conceptual path forward. By recognizing that gravity is the geometric framework of measurement rather than an active field, we bypass the contradictions of background-dependent quantization.
+The Gravitational Baseline Principle resolves the structural asymmetry between GR and QFT by recognizing gravity as the universal geometric framework rather than a conventional gauge field. A pre-geometric quantum substrate with relational entanglement structure yields emergent geometry, graviton excitations, and thermodynamic gravitational dynamics. This approach offers a conceptually consistent foundation for quantum gravity.
 
-\begin{thebibliography}{99}
-\bibitem{DeWitt1967} B. S. DeWitt, ``Quantum Theory of Gravity,'' {\it Phys. Rev.}, 160, 1113 (1967).
-\bibitem{Dirac1930} P. A. M. Dirac, {\it The Principles of Quantum Mechanics}, Oxford University Press (1930).
-\bibitem{Einstein1916} A. Einstein, ``The Foundation of the General Theory of Relativity,'' {\it Annalen der Physik}, 49, 769 (1916).
-\bibitem{Jacobson1995} T. Jacobson, ``Thermodynamics of Spacetime: The Einstein Equation of State,'' {\it Phys. Rev. Lett.}, 75, 1260 (1995).
-\bibitem{Susskind2016} L. Susskind, ``ER=EPR, GHZ, and the Consistency of Quantum Measurements,'' {\it Fortschritte der Physik}, 64, 72 (2016).
+\begin{thebibliography}{9}
+
+\bibitem{DeWitt1967}
+B.~S.~DeWitt, ``Quantum Theory of Gravity,'' \emph{Phys. Rev.} \textbf{160}, 1113 (1967).
+
+\bibitem{Dirac1930}
+P.~A.~M.~Dirac, \emph{The Principles of Quantum Mechanics}, Oxford University Press (1930).
+
+\bibitem{Einstein1916}
+A.~Einstein, ``The Foundation of the General Theory of Relativity,'' \emph{Annalen der Physik} \textbf{49}, 769 (1916).
+
+\bibitem{Jacobson1995}
+T.~Jacobson, ``Thermodynamics of Spacetime: The Einstein Equation of State,'' \emph{Phys. Rev. Lett.} \textbf{75}, 1260 (1995).
+
+\bibitem{Susskind2016}
+L.~Susskind, ``ER=EPR, GHZ, and the Consistency of Quantum Measurements,'' \emph{Fortschritte der Physik} \textbf{64}, 72 (2016).
+
+\bibitem{VanRaamsdonk2010}
+M.~Van Raamsdonk, ``Building up spacetime with quantum entanglement,'' \emph{Gen. Rel. Grav.} \textbf{42}, 2323 (2010).
+
 \end{thebibliography}
 
 \end{document}
