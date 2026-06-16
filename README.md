@@ -53,8 +53,6 @@ python Code/eigenmodes.py
 @article{jarvis2026baseline,
   title={The Gravitational Baseline Principle: Structural Asymmetry and the Pre-Geometric Quantum Substrate},
   author={Jarvis, Paul},
-  journal={arXiv preprint gr-qc/XXXX.XXXXX},
-  year={2026},
   url={https://github.com/ZaPpi3/jarvis-gravitational-baseline-principle}
 }
 ```
