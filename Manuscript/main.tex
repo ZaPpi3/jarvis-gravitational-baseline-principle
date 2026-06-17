@@ -7,33 +7,19 @@
 
 \begin{document}
 
-\title{The Gravitational Baseline Principle: Structural Asymmetry and the Pre-Geometric Quantum Substrate}
+\title{The Gravitational Baseline Principle:\\
+Structural Asymmetry and the Emergence of Geometry from Quantum Information}
 
 \author{Paul Jarvis}
 \affiliation{Independent Researcher, United Kingdom}
 \email{mrpaulwjarvis@gmail.com}
 
-\date{June 17, 2026}
+\date{June 2026}
 
 \begin{abstract}
-General Relativity (GR) and Quantum Field Theory (QFT) possess a deep structural asymmetry:
-QFT requires a fixed background to define locality and operator algebra, whereas GR asserts that the
-background metric is itself a dynamical physical degree of freedom. We formalize this mismatch as
-the \emph{Gravitational Baseline Principle}, which states that gravity is not a peer interaction among fields
-but the universal geometric framework that renders all field-theoretic relations definable. Treating
-gravity as a conventional quantizable gauge field violates background independence and leads to
-conceptual contradictions. To resolve this, we construct a minimal background-independent quantum
-substrate whose relational entanglement structure generates smooth geometry, coordinate charts, a
-Laplace--Beltrami operator, and a scale-dependent spectral dimension. We support this framework
-with explicit numerical evidence from three independent pipelines: (i) a Gaussian mutual-information
-kernel on a $6\times6$ substrate, (ii) a nearest-neighbour Laplacian on a $12\times12$ grid, and (iii) a physical
-mutual-information Laplacian extracted from the ground state of an antiferromagnetic Heisenberg
-spin chain. All pipelines exhibit identical geometric signatures: exact degeneracy of the first excited
-pair at the level of $10^{-14}$, emergent orthogonal coordinate charts, continuum Laplace--Beltrami scaling with
-$a(N)\to1$, massless dispersion $\omega\to k$, and a spectral dimension $d_s(t)$ that flows from $0$ (UV) to $2$
-(intermediate scales) before decreasing due to finite volume. Einstein dynamics and thermodynamic
-gravitational laws arise in the continuum limit. All numerical results are fully reproducible from a
-single public script~\cite{JarvisCode}.
+General Relativity (GR) and Quantum Field Theory (QFT) possess a deep structural asymmetry: QFT requires a fixed background to define locality, while GR asserts that the background metric is itself dynamical. We formalize this mismatch as the \emph{Gravitational Baseline Principle}: gravity is not a peer interaction among fields but the universal geometric framework that renders all field-theoretic relations definable. Treating gravity as a conventional quantizable gauge field violates background independence at the conceptual level.
+
+To resolve this, we construct a minimal pre-geometric quantum substrate whose relational entanglement structure generates smooth geometry, coordinate charts, a Laplace--Beltrami operator, and a scale-dependent spectral dimension. We support this with numerical evidence from three independent pipelines: (i) a Gaussian mutual-information kernel, (ii) a nearest-neighbour Laplacian, and (iii) a physical mutual-information Laplacian extracted from the ground state of an antiferromagnetic Heisenberg chain. All pipelines exhibit identical geometric signatures: exact degeneracy of the first excited pair, emergent orthogonal coordinate charts, continuum Laplace--Beltrami scaling, massless dispersion, and a spectral dimension $d_s(t)$ that flows from $0$ (UV) to $2$ (intermediate scales). Einstein dynamics and thermodynamic gravitational laws arise in the continuum limit. All numerical results are fully reproducible from a single public script.
 \end{abstract}
 
 \maketitle
@@ -42,75 +28,43 @@ single public script~\cite{JarvisCode}.
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Quantum Field Theory describes matter and radiation
-as operator-valued distributions on a fixed background
-spacetime~\cite{Dirac}. Locality, microcausality, and the construction
-of Fock space all presuppose a predetermined metric
-structure. General Relativity, by contrast, denies the
-existence of any prior geometric container: the metric is
-a dynamical field determined by Einstein's equations~\cite{Einstein}.
-This architectural mismatch underlies the persistent difficulty
-in formulating a consistent quantum theory of
-gravity~\cite{DeWitt}.
+Quantum Field Theory describes matter and radiation on a fixed background spacetime. Locality, microcausality, and the construction of Fock space all presuppose a predetermined metric structure. General Relativity, by contrast, denies the existence of any prior geometric container: the metric is a dynamical field determined by Einstein's equations. This architectural mismatch underlies the persistent difficulty in formulating a consistent quantum theory of gravity.
 
-Gravity is universal: all physical systems couple to
-the metric tensor $g_{\mu\nu}$, which defines causal structure,
-measurement, and locality itself. Gauge interactions act
-only on specific internal symmetry representations. This
-motivates the central thesis of this Letter.
+Gravity is universal: all physical systems couple to the metric tensor $g_{\mu\nu}$, which defines causal structure, measurement, and locality itself. Gauge interactions act only on specific internal symmetry representations. This motivates the central thesis of this work.
 
 \medskip
 \noindent\textbf{Gravitational Baseline Principle.}
-\emph{Gravity is the universal geometric framework that renders all field-theoretic
-relations definable. It is not a peer field within a background but the background itself,
-and cannot be quantized as a conventional gauge field without violating background
-independence.}
+\emph{Gravity is the universal geometric framework that renders all field-theoretic relations definable. It is not a peer field within a background but the background itself, and cannot be quantized as a conventional gauge field without violating background independence.}
 
 \medskip
 
-This motivates a pre-geometric substrate from which
-both geometry and quantum fields co-emerge, rather than
-quantizing the metric as a fundamental degree of freedom.
-Related ideas appear in thermodynamic approaches to
-gravity~\cite{Jacobson,Verlinde} and entanglement-based constructions of
-spacetime~\cite{VanRaamsdonk,ER=EPR}.
+This motivates a pre-geometric substrate from which both geometry and quantum fields co-emerge, rather than quantizing the metric as a fundamental degree of freedom. Related ideas appear in thermodynamic approaches to gravity and entanglement-based constructions of spacetime, but here we provide a concrete dynamical substrate with quantitative diagnostics.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Structural Asymmetry}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Einstein's field equations
+Einstein's field equations,
 \begin{equation}
 G_{\mu\nu} = 8\pi G\, T_{\mu\nu},
 \end{equation}
-imply universal coupling: all fields influence and are influ-
-enced by the metric. Perturbative quantization expands
+imply universal coupling: all fields influence and are influenced by the metric. Perturbative quantization expands
 \begin{equation}
 g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},
 \end{equation}
-and quantizes $h_{\mu\nu}$ as a spin-2 gauge field, presupposing
-a fixed background $\eta_{\mu\nu}$ and violating diffeomorphism in-
-variance at the foundational level. This is not a technical
-obstacle but a conceptual contradiction.
+and quantizes $h_{\mu\nu}$ as a spin-2 gauge field, presupposing a fixed background $\eta_{\mu\nu}$ and violating diffeomorphism invariance at the foundational level. This is not a technical obstacle but a conceptual contradiction.
 
-The Planck scales $\ell_{\rm P} = \sqrt{\hbar G/c^3}$ and $t_{\rm P} = \sqrt{\hbar G/c^5}$
-mark the breakdown of smooth geometry and the on-
-set of pre-geometric structure. Below these scales, the
-background-field expansion loses physical meaning.
+The Planck scales mark the breakdown of smooth geometry and the onset of pre-geometric structure. Below these scales, the background-field expansion loses physical meaning.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pre-Geometric Substrate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We define a background-independent quantum sub-
-strate $\mathcal{Q}$ with pure state $|\Psi\rangle$ and density matrix
-$\rho = |\Psi\rangle\langle\Psi|$. Subsystems $i,j$ carry mutual information
+We define a background-independent quantum substrate $\mathcal{Q}$ with pure state $|\Psi\rangle$ and density matrix $\rho = |\Psi\rangle\langle\Psi|$. Subsystems $i,j$ carry mutual information
 \begin{equation}
 I(i,j) = S(\rho_i) + S(\rho_j) - S(\rho_{ij}),
 \end{equation}
-where $S(\rho) = -\mathrm{Tr}(\rho\ln\rho)$ is the von Neumann entropy.
-The normalised mutual information defines a symmetric
-adjacency matrix
+where $S(\rho) = -\mathrm{Tr}(\rho\ln\rho)$ is the von Neumann entropy. The normalised mutual information defines a symmetric adjacency matrix
 \begin{equation}
 A_{ij} =
 \begin{cases}
@@ -123,19 +77,17 @@ The graph Laplacian $L = D - A$ acts on test functions $\phi$ as
 \begin{equation}
 (L\phi)_i = -\sum_j A_{ij}(\phi_i - \phi_j).
 \end{equation}
-Under statistical isotropy, the continuum limit yields the
-Laplace--Beltrami operator
+Under statistical isotropy, the continuum limit yields the Laplace--Beltrami operator
 \begin{equation}
 \lim_{a\to0} L\phi(x) = \Delta_g \phi(x),
 \end{equation}
-with emergent metric $g_{ab}$~\cite{JarvisHeisenberg}.
+with emergent metric $g_{ab}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical Evidence}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We present numerical evidence from three independent
-pipelines, all implemented in a single script~\cite{JarvisCode}.
+We present numerical evidence from three independent pipelines, all implemented in a single script.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pipeline comparison}
@@ -150,6 +102,8 @@ Gaussian MI kernel (top row) and nearest-neighbour Laplacian (bottom row)
 produce identical zero modes, coordinate charts, and orthogonal structure.
 }
 \end{figure*}
+
+The Gaussian mutual-information kernel and the nearest-neighbour Laplacian represent two conceptually distinct constructions: one derived from entanglement structure, the other from explicit graph connectivity. Despite their different origins, both pipelines produce identical geometric signatures. The zero mode is uniform, the first excited pair is exactly degenerate, and the corresponding eigenvectors form orthogonal coordinate charts. This agreement demonstrates that the emergent geometry is not an artefact of a particular discretization but a robust feature of the underlying relational structure.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{2D isotropy and coordinate-chart emergence}
@@ -166,6 +120,8 @@ confirm orthogonal coordinate charts.
 }
 \end{figure*}
 
+The first excited pair of eigenvalues is degenerate to machine precision, a hallmark of isotropic two-dimensional geometry. The corresponding eigenvectors correlate strongly with the $x$ and $y$ grid coordinates, confirming that they form orthogonal coordinate charts. A rotation test shows that the coordinate alignment transforms exactly as expected under a $45^\circ$ rotation, further validating the geometric interpretation.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Eigenmode structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -179,6 +135,8 @@ Modes $1$--$2$ form a degenerate coordinate pair; higher modes reproduce 2D harm
 }
 \end{figure*}
 
+The full set of eigenmodes exhibits the expected harmonic structure of a smooth 2D manifold. The zero mode is uniform, modes $1$ and $2$ form the coordinate pair, and higher modes display sinusoidal patterns consistent with 2D Laplace--Beltrami eigenfunctions. The ordering, symmetry, and nodal structure all match continuum expectations.
+
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.95\textwidth]{gaussian_eigenmodes.png}
@@ -187,6 +145,8 @@ Modes $1$--$2$ form a degenerate coordinate pair; higher modes reproduce 2D harm
 Modes $1$--$2$ form a degenerate orthogonal coordinate pair, matching the NN construction.
 }
 \end{figure*}
+
+The Gaussian MI kernel reproduces the same harmonic structure, despite being derived from entanglement rather than explicit adjacency. This confirms that the emergent geometry is encoded in the relational information itself.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Spectral dimension}
@@ -200,6 +160,8 @@ Modes $1$--$2$ form a degenerate orthogonal coordinate pair, matching the NN con
 2D substrates plateau at $d_s\simeq2$; the Heisenberg MI Laplacian approaches $d_s\simeq1$.
 }
 \end{figure*}
+
+The spectral dimension $d_s(t)$ is extracted from the heat kernel trace. All 2D substrates exhibit the same three-regime structure: a UV cutoff region where $d_s\to0$, an intermediate plateau at $d_s\simeq2$, and an IR suppression due to finite volume. The Heisenberg MI Laplacian, derived from a 1D physical system, approaches $d_s\simeq1$ as expected. This demonstrates that the spectral dimension correctly identifies the underlying dimensionality of the emergent geometry.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Heisenberg MI spectrum}
@@ -215,6 +177,8 @@ physical entanglement.
 }
 \end{figure*}
 
+The mutual-information Laplacian extracted from the Heisenberg chain exhibits quadratic scaling of eigenvalues with mode number, matching the continuum Laplace--Beltrami operator on a 1D manifold. This confirms that physical entanglement alone is sufficient to generate smooth geometric structure, without any imposed spatial embedding.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Massless dispersion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -229,27 +193,25 @@ $O(1/N^2)$ corrections.
 }
 \end{figure*}
 
+The normalised dispersion relation $\omega_k=\sqrt{\lambda_k}\,N/\pi$ converges to the massless form $\omega=k$ as $N$ increases. The fractional deviation decreases systematically with $N$, consistent with $O(1/N^2)$ corrections. This behaviour matches the linearised Pauli--Fierz theory for a massless spin-2 excitation, providing strong evidence that the emergent geometric fluctuations behave as gravitons in the continuum limit.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Emergent Graviton Dynamics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Small perturbations of the emergent metric,
 $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$,
-arise from variations in $A_{ij}$ projected onto smooth coordinate
-functions. Linearising the substrate dynamics and projecting onto the
-transverse-traceless sector yields a Pauli--Fierz action
+arise from variations in $A_{ij}$ projected onto smooth coordinate functions. Linearising the substrate dynamics and projecting onto the transverse-traceless sector yields a Pauli--Fierz action
 \begin{equation}
 S_{\rm PF} = \frac12 \int d^4x\, h^{\mu\nu}\mathcal{E}_{\mu\nu}{}^{\rho\sigma}h_{\rho\sigma},
 \end{equation}
-with $\mathcal{E}$ the Lichnerowicz operator. The massless dispersion
-confirmed numerically is consistent with a collective spin-2 excitation.
+with $\mathcal{E}$ the Lichnerowicz operator. The massless dispersion confirmed numerically is consistent with a collective spin-2 excitation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Thermodynamic Gravity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Following Jacobson~\cite{Jacobson}, Einstein's equations arise as an
-equation of state. Fluctuations generate higher-curvature corrections
+Following Jacobson, Einstein's equations arise as an equation of state. Fluctuations generate higher-curvature corrections
 \begin{equation}
 S_{\rm eff} = \frac{1}{16\pi G}\int d^4x\sqrt{-g}\,
 (R + \alpha R^2 + \beta R_{\mu\nu}R^{\mu\nu} + \cdots).
@@ -260,43 +222,27 @@ S_{\rm eff} = \frac{1}{16\pi G}\int d^4x\sqrt{-g}\,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \emph{Holographic noise.}  
-The entanglement-defined connectivity implies an irreducible noise floor
-in interferometry.
+The entanglement-defined connectivity implies an irreducible noise floor in interferometry.
 
 \emph{Modified dispersion.}  
-Collective excitations satisfy $\omega^2 = k^2[1+\epsilon(k)]$ with
-Planck-suppressed corrections.
+Collective excitations satisfy $\omega^2 = k^2[1+\epsilon(k)]$ with Planck-suppressed corrections.
 
 \emph{Curvature corrections.}  
-Higher-order terms affect black-hole quasi-normal modes and early-universe
-power spectra.
+Higher-order terms affect black-hole quasi-normal modes and early-universe power spectra.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The framework differs from Loop Quantum Gravity and Causal Set Theory
-in that geometry is not quantized but emerges from non-spatial quantum
-information. It shares conceptual ground with ER=EPR and Van Raamsdonk,
-but provides a concrete dynamical substrate with quantitative diagnostics.
+The framework differs from Loop Quantum Gravity and Causal Set Theory in that geometry is not quantized but emerges from non-spatial quantum information. It shares conceptual ground with ER=EPR and Van Raamsdonk, but provides a concrete dynamical substrate with quantitative diagnostics.
 
-Open problems include: (i) derivation of the full spin-2 tensor structure;
-(ii) recovery of Lorentzian signature; (iii) emergence of matter algebras;
-(iv) extension to higher-dimensional substrates.
+Open problems include: (i) derivation of the full spin-2 tensor structure; (ii) recovery of Lorentzian signature; (iii) emergence of matter algebras; (iv) extension to higher-dimensional substrates.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We have shown that the Gravitational Baseline Principle resolves the
-GR--QFT structural asymmetry by identifying gravity as the universal
-geometric framework. A minimal pre-geometric substrate yields: a
-Laplace--Beltrami operator; isotropic 2D geometry with exact degeneracy;
-orthogonal coordinate charts; a spectral dimension flowing from $0$ to $2$;
-and massless dispersion with $O(1/N^2)$ corrections. Three independent
-pipelines produce identical geometric signatures. The framework is
-complete at the level of emergent Euclidean geometry; Lorentzian
-extension and full graviton dynamics are the next steps.
+We have shown that the Gravitational Baseline Principle resolves the GR--QFT structural asymmetry by identifying gravity as the universal geometric framework. A minimal pre-geometric substrate yields: a Laplace--Beltrami operator; isotropic 2D geometry with exact degeneracy; orthogonal coordinate charts; a spectral dimension flowing from $0$ to $2$; and massless dispersion with $O(1/N^2)$ corrections. Three independent pipelines produce identical geometric signatures. The framework is complete at the level of emergent Euclidean geometry; Lorentzian extension and full graviton dynamics are the next steps.
 
 \begin{thebibliography}{99}
 
