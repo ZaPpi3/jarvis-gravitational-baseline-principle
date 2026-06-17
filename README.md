@@ -10,13 +10,27 @@ The core framework identifies a fundamental structural asymmetry between General
 
 For quick access to the paper's contents, structural layouts, or code baselines, navigate to the following core files:
 
-*   **`main.pdf`**: The final, production-compiled document structured in the official, two-column Physical Review D (PRD) journal format.
-*   **`Manuscript/`**: Contains the raw LaTeX source code and compilation configurations.
-    *   `main.tex`: The unified, consolidated REVTeX 4-2 source file optimized for local compilation or direct upload to the arXiv production servers.
-*   **`Figures/`**: Publication graphics dynamically embedded into the manuscript layout.
-    *   `eigenmodes.png`: High-resolution (300 DPI) visual output showcasing spontaneous multi-dimensional coordinate emergence, embedded directly as Fig. 1.
-*   **`Code/`**: The complete Python implementation of the numerical models supporting the theoretical framework.
-    *   `eigenmodes.py`: Python script that builds the relational quantum entanglement kernel and diagonalises the low-lying Laplacian spectrum.
+**main.pdf**  
+The final, production‑compiled manuscript in the official two‑column Physical Review D (PRD) format.
+
+**Manuscript/**  
+Contains the raw LaTeX source code and build configuration.
+
+**main.tex**  
+The unified REVTeX 4‑2 source file, optimized for local compilation or direct arXiv submission.
+
+**Figures/**  
+All publication graphics dynamically embedded into the manuscript.
+
+- **eigenmodes.png** — High‑resolution (300 DPI) visualisation of spontaneous coordinate‑chart emergence from a Gaussian entanglement kernel (Fig. 1).
+
+**Code/**  
+Complete Python implementation of the numerical models supporting the theoretical framework.
+
+- **substrate_spectral_tests.py** — Full spectral‑geometry pipeline used in the paper.  
+  Performs 1D finite‑size scaling, 2D Laplacian diagonalisation, degeneracy tests, coordinate‑chart correlations, graviton dispersion, and spectral‑dimension flow.
+
+- **eigenmodes.py** — Builds the Gaussian relational entanglement kernel and diagonalises the low‑lying Laplacian spectrum to produce the eigenmodes figure used in the manuscript.
 
 ---
 
