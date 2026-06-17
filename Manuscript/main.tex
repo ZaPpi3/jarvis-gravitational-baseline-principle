@@ -25,7 +25,7 @@
 \begin{abstract}
 General Relativity (GR) and Quantum Field Theory (QFT) possess a deep structural asymmetry: QFT requires a fixed background to define locality and operator algebra, whereas GR asserts that the background metric is itself a dynamical physical degree of freedom. We formalize this mismatch as the \emph{Gravitational Baseline Principle}, which states that gravity is not a peer interaction among fields but the universal geometric framework that renders all field-theoretic relations definable. Treating gravity as a conventional quantizable gauge field violates background independence and leads to conceptual contradictions.
 
-To resolve this, we construct a minimal pre-geometric quantum substrate whose relational entanglement structure generates smooth geometry, coordinate charts, a Laplace--Beltrami operator, a massless spin-2 excitation, and a scale-dependent spectral dimension. We support this framework with explicit numerical evidence from three independent pipelines implemented in the unified script \texttt{code/gravitational\_baseline\_numerics.py}: (i) a Gaussian mutual-information kernel on a $6\times 6$ substrate, (ii) a nearest-neighbour Laplacian on a $12\times 12$ grid, and (iii) a physical mutual-information Laplacian extracted from the ground state of a Heisenberg spin chain. All pipelines exhibit the same geometric signatures: exact degeneracy of the first excited pair, emergent coordinate gradients, continuum Laplace--Beltrami scaling, massless dispersion $\omega=k$, and a spectral dimension $d_s(t)$ that flows from $0$ (UV) to $2$ (intermediate scales) before decreasing due to finite volume. Einstein dynamics and thermodynamic gravitational laws arise in the continuum limit. This provides a conceptually coherent and operationally testable route to quantum gravity without quantizing the metric as a fundamental field.
+To resolve this, we construct a minimal pre-geometric quantum substrate whose relational entanglement structure generates smooth geometry, coordinate charts, a Laplace--Beltrami operator, a massless spin-2 excitation, and a scale-dependent spectral dimension. We support this framework with explicit numerical evidence from three independent pipelines, all implemented in the unified script \texttt{code/gravitational\_baseline\_numerics.py}: (i) a Gaussian mutual-information kernel on a $6\times 6$ substrate, (ii) a nearest-neighbour Laplacian on a $12\times 12$ grid, and (iii) a physical mutual-information Laplacian extracted from the ground state of a Heisenberg spin chain. All pipelines exhibit the same geometric signatures: exact degeneracy of the first excited pair, emergent coordinate gradients, continuum Laplace--Beltrami scaling, massless dispersion $\omega=k$, and a spectral dimension $d_s(t)$ that flows from $0$ (UV) to $2$ (intermediate scales) before decreasing due to finite volume. Einstein dynamics and thermodynamic gravitational laws arise in the continuum limit. This provides a conceptually coherent and operationally testable route to quantum gravity without quantizing the metric as a fundamental field.
 \end{abstract}
 
 \maketitle
@@ -44,11 +44,13 @@ We develop a minimal pre-geometric quantum substrate whose relational entangleme
 \section{Structural asymmetry and the Gravitational Baseline Principle}
 %----------------------------------------------------------
 
-Einstein's field equations
+Einstein’s field equations
 \begin{equation}
 G_{\mu\nu} = 8\pi G\, T_{\mu\nu}
 \end{equation}
-imply universal coupling: all fields influence and are influenced by the metric. Perturbative quantization expands
+imply universal coupling: all fields influence and are influenced by the metric.
+
+Perturbative quantization expands
 \begin{equation}
 g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},
 \end{equation}
@@ -77,7 +79,7 @@ which defines a symmetric entanglement-derived adjacency matrix $A_{ij}$.
 
 A discrete structural operator acts on test functions $\phi$:
 \begin{equation}
-(\mathcal{L}_Q \phi)_i = \sum_j A_{ij} (\phi_i - \phi_j),
+(\mathcal{L}_Q \phi)_i = \sum_j A_{ij}(\phi_i - \phi_j),
 \end{equation}
 the unnormalized graph Laplacian. In the continuum limit,
 \begin{equation}
@@ -89,12 +91,12 @@ yielding the Laplace--Beltrami operator.
 \section{Spectral geometry: numerical evidence}
 %----------------------------------------------------------
 
-We now present numerical evidence from three independent pipelines implemented in \texttt{code/gravitational\_baseline\_numerics.py}:
+We now present numerical evidence from three independent pipelines, all implemented in the unified script \texttt{code/gravitational\_baseline\_numerics.py}:
 
 \begin{itemize}
-\item A Gaussian mutual-information kernel on a $6\times 6$ substrate.
-\item A nearest-neighbour Laplacian on a $12\times 12$ grid.
-\item A physical mutual-information Laplacian extracted from the ground state of a Heisenberg spin chain.
+\item a Gaussian mutual-information kernel on a $6\times 6$ substrate,
+\item a nearest-neighbour Laplacian on a $12\times 12$ grid,
+\item a physical mutual-information Laplacian extracted from the ground state of a Heisenberg spin chain.
 \end{itemize}
 
 All pipelines produce identical geometric signatures.
@@ -149,7 +151,8 @@ The Heisenberg MI Laplacian (physical entanglement) exhibits the same quadratic 
 \centering
 \includegraphics[width=0.48\textwidth]{figures/spectral_dimension.png}
 \caption{
-Spectral dimension flow for all pipelines. 2D substrates plateau at $d_s=2$; the Heisenberg MI Laplacian (1D substrate) approaches $d_s=1$.}
+Spectral dimension flow for all pipelines. 2D substrates plateau at $d_s=2$; the Heisenberg MI Laplacian (1D substrate) approaches $d_s=1$.
+}
 \end{figure}
 
 %----------------------------------------------------------
@@ -160,22 +163,33 @@ Spectral dimension flow for all pipelines. 2D substrates plateau at $d_s=2$; the
 \centering
 \includegraphics[width=0.48\textwidth]{figures/graviton_dispersion.png}
 \caption{
-Normalized dispersion relation $\omega_k = \sqrt{\lambda_k}\, N/\pi$ for $N=20,40,80$. All curves converge to the massless line $\omega=k$. Fractional deviation decreases systematically as $N\to\infty$.}
+Normalized dispersion relation $\omega_k = \sqrt{\lambda_k}\, N/\pi$ for $N=20,40,80$. All curves converge to the massless line $\omega=k$. Fractional deviation decreases systematically as $N\to\infty$.
+}
 \end{figure}
 
-This is the exact dispersion of a massless spin-2 \emph{collective excitation} of the substrate.
+This is the exact dispersion of a massless spin-2 collective excitation of the substrate.
 
 %----------------------------------------------------------
 \subsection*{Open-source reproducibility}
 %----------------------------------------------------------
 
-All numerical results in this section were generated using the unified script:
+All numerical results in this section were generated using the unified script
+\texttt{code/gravitational\_baseline\_numerics.py}. The complete research code, including the
+full numerical engine and figure-generation pipeline, is openly available at:
 
 \begin{center}
-\url{https://github.com/ZaPpi3/entanglement-spatial-emergence}
+\url{https://github.com/ZaPpi3/jarvis-gravitational-baseline-principle/blob/main/code/gravitational_baseline_numerics.py}
 \end{center}
 
-The repository contains the full codebase in \texttt{/code} and all figures in \texttt{/figures}. Any reader can reproduce the $10^{-14}$ degeneracy, the massless dispersion, and the spectral-dimension flow with a single command.
+All publication-quality figures are generated automatically into \texttt{/figures}. Any reader
+can reproduce the $10^{-14}$ degeneracy, the massless dispersion relation, and the spectral-dimension
+flow by running:
+
+\begin{verbatim}
+python code/gravitational_baseline_numerics.py
+\end{verbatim}
+
+This ensures full transparency and reproducibility of all numerical claims.
 
 %----------------------------------------------------------
 \section{Emergent graviton dynamics}
