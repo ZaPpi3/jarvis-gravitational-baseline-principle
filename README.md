@@ -1,9 +1,9 @@
 # The Gravitational Baseline Principle
 
-**Structural Asymmetry and the Emergence of Geometry from Quantum Information**
+**Structural Asymmetry and the Pre-Geometric Quantum Substrate**
 
 Paul Jarvis · Independent Researcher, United Kingdom
-[mrpaulwjarvis@gmail.com](mailto:mrpaulwjarvis@gmail.com)
+[mrpaulwjarvis@gmail.com](mailto:mrpaulwjarvis@gmail.com) · ORCID: [0009-0009-8933-857X](https://orcid.org/0009-0009-8933-857X)
 
 📄 [Read the paper (PDF)](main.pdf) · 📝 [LaTeX source](main.tex) · 💻 [Reproducibility code](Code/)
 
@@ -12,74 +12,60 @@ Paul Jarvis · Independent Researcher, United Kingdom
 ## Summary
 
 General Relativity and Quantum Field Theory sit on incompatible foundations:
-QFT needs a fixed background to define locality, while GR makes the metric
+QFT requires a fixed background to define locality, while GR makes the metric
 itself dynamical. This paper formalizes that tension as the **Gravitational
-Baseline Principle** — the idea that gravity is not a fundamental field with
-its own quantum degree of freedom, but a statistical, thermodynamic quantity
-defined over a more fundamental substrate, in the same sense that temperature
-is a bookkeeping device over molecular motion rather than a property any
-single molecule carries. On this view, the long-standing difficulty in
-quantizing gravity isn't a technical obstacle to be solved — it's the
-expected result of treating a derived quantity as if it were elementary.
+Baseline Principle**: gravity is not a peer interaction among fields but the
+universal geometric framework that renders all field-theoretic relations
+definable — not a field within a background, but the background itself.
 
-The paper builds a concrete, numerically tractable substrate to test this:
-a graph Laplacian built from the mutual-information structure of a quantum
-system, and asks whether smooth geometry — and, ultimately, a graviton — can
-be seen to emerge from it.
+The paper proposes a minimal, background-independent quantum substrate, built
+from the mutual-information structure between subsystems of a relational
+density matrix, from which smooth geometry, the graviton, and thermodynamic
+gravitational dynamics are conjectured to co-emerge in the continuum limit.
 
 ## What the numerics actually show
 
+Rather than treating the continuum and graviton limits as automatic, the
+paper brings established theorems to bear on exactly what they require —
+graph-Laplacian convergence theory (Belkin & Niyogi 2008; Singer 2006) for
+the continuum limit, and the Fierz–Pauli uniqueness theorem for the graviton
+— and then **tests both conditions directly**, by exact diagonalization on a
+concrete, minimal realization of the substrate (the critical spin-1/2
+antiferromagnetic Heisenberg chain, with a gapped/dimerized chain as a
+control):
+
 | Test | Result |
 |---|---|
-| 2D lattice pipelines (Gaussian kernel, nearest-neighbour) | Reproduce exact coordinate charts and Laplace–Beltrami structure — but these substrates are given spatial coordinates as input, so this validates the analysis pipeline rather than demonstrating emergence |
-| Heisenberg spin chain (no coordinates assumed) | The claim of quadratic eigenvalue scaling (expected for continuum 1D geometry) is tested against the alternative hypothesis and **fails**: DMRG data up to N=32 favour linear-in-*k* scaling instead |
-| Cross-model universality test | The same finite-size exponent tracks each model's Luttinger parameter and central charge — the signature of quantum critical structure, not a fixed geometric constant |
-| Departure from criticality | Dimerizing the chain away from its critical point drives the exponent continuously toward the genuinely geometric value (*b*=2) as the correlation length shortens — a mechanistic explanation for *why* the pipeline works in the gapped/local regime and not at criticality |
-| Massless graviton dispersion / Pauli–Fierz structure | **Not found.** On the Principle above, this is the expected outcome, not a shortfall — no more a graviton should exist here than a fundamental quantum of temperature |
-| Perturbation stability | All of the above is stable under 1–5% noise on the underlying adjacency matrices (30 trials/level) |
+| Emergent Lorentz-consistent dispersion (Sec. 5) — is the low-energy excitation spectrum linear, not quadratic, in momentum? | **Confirmed.** Finite-size gap scales as $N^{-0.96}$ ($R^2=0.999994$), matching the exact des Cloizeaux–Pearson result; a quadratic (non-relativistic) alternative is decisively excluded ($R^2=0.009$). |
+| Euclidean metric encoding (Sec. 4.1) — does the mutual-information matrix encode a genuine Euclidean distance, as the graph-Laplacian convergence theorems require? | **Falsified** for the critical substrate ($R^2=0.9998$ favors a logarithmic, not linear, fit) — but not featurelessly: the specific form obtained matches Calabrese–Cardy CFT entanglement scaling and points toward a hyperbolic, holographically-flavored alternative. The gapped control recovers the originally-hoped-for Euclidean behavior. |
 
-In short: the paper finds real, reproducible evidence that this construction
-tracks *quantum critical structure*, and no evidence of emergent continuum
-geometry or a fundamental graviton — which the paper argues is exactly what
-you'd expect if the Gravitational Baseline Principle is correct.
-
-## Repository structure
-
-```
-.
-├── main.pdf                  # the paper
-├── main.tex                  # LaTeX source
-├── figures/                  # all figures in the paper, generated by Code/
-└── Code/                     # everything needed to reproduce every number,
-    │                         # table, and figure in the paper
-    ├── README.md             # script-to-figure/table map, requirements,
-    │                         # validation notes, known limitations
-    └── *.py, *.json          # analysis scripts and raw output data
-```
-
-See **[`Code/README.md`](Code/README.md)** for exact instructions on
-reproducing any specific figure or table, including which scripts require
-`quimb` (DMRG) versus plain `numpy`/`scipy` (exact diagonalization).
+In short: one open problem resolves in the framework's favor, the other is
+redirected toward a specific, falsifiable, non-Euclidean alternative rather
+than closed. See **[`Code/README.md`](Code/README.md)** for exact
+reproduction instructions.
 
 ## Status and scope
 
-This is an independent research project, not peer-reviewed. The paper is
-explicit throughout about which results are established by the numerics
-(the critical-structure diagnostics above) versus which are motivated but
-unproven (a constructive metric from the mutual-information matrix; genuine
-tensorial/spin-2 structure). The Limitations section (Sec. IX of the paper)
-lists the concrete open problems, including a non-circular test of coordinate
-emergence in two or more dimensions, which is the highest-priority next step.
+This is a conceptual, analytical paper whose central claims are stated as
+precise, falsifiable technical conditions and then partly tested numerically
+(see above) rather than asserted outright. Section 9 (Limitations and
+Outlook) lists the remaining open work: establishing the substrate's emergent
+gauge redundancy, extending the numerical tests beyond the 1D Heisenberg
+chain and toward higher-dimensional substrates, a Lorentzian extension,
+derivation of matter field algebras, renormalization analysis, and
+simulation of the substrate's own proposed (non-linear, self-consistent)
+evolution equation, which the current tests do not simulate directly.
 
-Feedback, replication attempts, and issues are welcome.
+This is an independent research project, not peer-reviewed. Feedback and
+replication attempts are welcome.
 
 ## Citing this work
 
-If you use this code or reference this paper, please cite it as:
+If you reference this paper, please cite it as:
 
 ```
 P. Jarvis, "The Gravitational Baseline Principle: Structural Asymmetry and
-the Emergence of Geometry from Quantum Information" (2026).
+the Pre-Geometric Quantum Substrate" (2026).
 ```
 
 ## License

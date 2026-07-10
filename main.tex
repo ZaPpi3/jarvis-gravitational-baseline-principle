@@ -1,422 +1,281 @@
-\documentclass[aps,prd,twocolumn,nofootinbib,superscriptaddress]{revtex4-2}
+\documentclass[11pt]{article}
 
 \usepackage{amsmath,amssymb,amsfonts}
-\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{margin=1in}
 \usepackage{hyperref}
-\usepackage{bm}
+\usepackage{graphicx}
 \usepackage{booktabs}
+\graphicspath{{figures/}}
+
+\title{The Gravitational Baseline Principle:\\
+Structural Asymmetry and the\\
+Pre-Geometric Quantum Substrate}
+
+\author{Paul Jarvis \\
+Independent Researcher, UK \\
+ORCID: 0009-0009-8933-857X \\
+\texttt{mrpaulwjarvis@gmail.com}}
+
+\date{June 8, 2026}
 
 \begin{document}
 
-\title{The Gravitational Baseline Principle:\\
-Structural Asymmetry and the Emergence of Geometry from Quantum Information}
-
-\author{Paul Jarvis}
-\affiliation{Independent Researcher, United Kingdom}
-\email{mrpaulwjarvis@gmail.com}
-
-\date{June 2026}
-
-\begin{abstract}
-General Relativity (GR) and Quantum Field Theory (QFT) exhibit a structural inconsistency: QFT requires a fixed background to define locality, whereas GR asserts that the metric is dynamical and background-independent. We formalize this tension as the \emph{Gravitational Baseline Principle}: gravity is not a fundamental field with an independent quantum degree of freedom, but a statistical, thermodynamic quantity defined over the energy-momentum of a more fundamental substrate -- analogous to temperature, which is not a property any single molecule carries but a bookkeeping device over molecular motion in aggregate. On this view, the persistent difficulty in quantizing gravity as a conventional gauge field is not a technical obstacle to be overcome but the expected consequence of treating a derived, statistical quantity as though it were fundamental.
-
-We construct a minimal pre-geometric quantum substrate and study whether smooth geometric structure can be extracted from the spectrum of its mutual-information (MI) Laplacian. On pre-assigned lattice substrates (Gaussian kernel and nearest-neighbour pipelines) we recover, as expected, coordinate charts and the exact spectral degeneracies of a discrete 2D Laplacian; because these pipelines supply spatial coordinates as input, we present this as a validation of the construction rather than independent evidence of geometric emergence. For the Heisenberg-chain pipeline, in which no spatial structure is assumed \emph{a priori}, we test the hypothesis that its low-lying MI-Laplacian spectrum reproduces a continuum Laplace--Beltrami operator using exact diagonalization ($N\le16$) extended by DMRG calculations to $N=32$, validated against exact diagonalization to $\sim10^{-6}$. Against the natural alternative hypothesis, the data disfavour quadratic eigenvalue scaling: the low-lying spectrum is instead consistent with $\lambda_k\propto k$ and $\lambda_1\propto N^{-0.88}$, both increasingly favoured over the quadratic/$N^{-2}$ forms as $N$ grows, with a residual structure consistent with the marginally irrelevant operator at the SU(2) Heisenberg point. We interpret this pipeline's signature as a diagnostic of quantum critical structure rather than emergent continuum Euclidean geometry, a reading corroborated by two further tests: across several critical spin models the same exponent tracks each model's Luttinger parameter and universality class rather than a fixed geometric constant, and, within the Heisenberg chain itself, dimerizing away from criticality drives the exponent continuously from its anomalous critical value toward the genuinely geometric value $b=2$ as the correlation length shortens. On the Gravitational Baseline Principle, this is the expected outcome rather than a shortfall: no massless graviton dispersion or Pauli--Fierz structure is found because none is expected to exist, at this or any scale, if gravity is a statistical residue rather than a fundamental field. All numerical results are fully reproducible from publicly available code.
-\end{abstract}
-
 \maketitle
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+We identify a fundamental structural asymmetry between General Relativity (GR) and Quantum Field Theory (QFT): quantum fields require a fixed kinematic background to define locality and operator algebra, whereas GR asserts that the background metric is itself a dynamical physical degree of freedom. We formalize this mismatch as the \emph{Gravitational Baseline Principle}, which states that gravity is not a peer interaction among fields but the universal geometric framework that renders all field-theoretic relations definable. Treating gravity as a conventional quantizable gauge field leads to contradictions in background independence and gauge covariance. To resolve this, we propose a minimal, background-independent quantum substrate from which both smooth manifolds and quantum field algebras are conjectured to co-emerge. Geometry is proposed to arise from the entanglement structure of a relational density matrix, and we identify the specific conditions -- via known uniqueness and convergence theorems -- under which its low-energy collective excitations would take the form of a graviton and its continuum limit would reduce to the Laplace--Beltrami operator and thermodynamic Einstein dynamics. Rather than treating these conditions as automatic, we test both directly on a concrete, minimal realization of the substrate (the spin-1/2 antiferromagnetic Heisenberg chain at its quantum critical point, exact diagonalization, $N$ up to 26), with a gapped chain as a control. The first condition, linear (Lorentz-consistent) low-energy dispersion, is confirmed to high precision ($E_{\rm gap}\propto N^{-0.96}$, $R^2=0.999994$; a quadratic alternative is excluded, $R^2=0.009$), matching the exact des Cloizeaux--Pearson result. The second, that the mutual-information matrix encodes a genuine Euclidean metric distance, is falsified for the critical substrate ($R^2=0.9998$ for a logarithmic, not linear, fit to the candidate distance) but not featurelessly: the specific functional form obtained is the same one associated with entanglement entropy in $1+1$D CFT and with hyperbolic, holographically-flavored bulk reconstructions, and it is absent in the gapped control, where the originally hoped-for Euclidean behavior is instead recovered. This framework provides a conceptually coherent, precisely specified, and now partly numerically tested path toward unifying GR and QFT without quantizing the metric as a fundamental field -- one open problem resolved in the framework's favor, the other redirected toward a specific, non-Euclidean alternative rather than closed.
+\end{abstract}
+
 \section{Introduction}
-\label{sec:intro}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Quantum Field Theory describes matter and radiation on a fixed background spacetime. Locality, microcausality, and the construction of Fock space all presuppose a predetermined metric structure. General Relativity, by contrast, denies the existence of any prior geometric container: the metric is a dynamical field determined by Einstein's equations. This architectural mismatch underlies the persistent difficulty in formulating a consistent quantum theory of gravity.
+Quantum Field Theory (QFT) describes matter and radiation as operator-valued distributions defined on a fixed background spacetime \cite{Dirac}. Locality, microcausality, and the construction of a Fock space all require a predetermined metric structure. General Relativity (GR), by contrast, denies the existence of any prior geometric container: the metric itself is a dynamical field determined by the Einstein equations \cite{Einstein}. This architectural mismatch underlies the persistent difficulty in formulating a consistent quantum theory of gravity \cite{DeWitt}.
 
-A useful analogy is temperature. No single molecule has a temperature; temperature is a statistical bookkeeping device defined over the aggregate motion of many molecules, and it would be a category error to search for a "temperature particle." We take seriously the possibility that gravity is analogous: not a fundamental field carried by some elementary quantum, but a statistical, thermodynamic quantity defined over the energy-momentum of a more fundamental substrate. This motivates the central thesis of this work.
+Gravity is universal: all physical systems couple to the metric tensor $g_{\mu\nu}$, which defines causal structure, measurement, and the very notion of locality. Gauge interactions, by contrast, act only on specific internal symmetry representations. This universality is not merely an empirical observation but a theorem: Weinberg showed that Lorentz invariance and unitarity of the $S$-matrix alone force any theory containing a massless spin-2 particle to couple to the total energy-momentum tensor with a single coupling constant, the same for every species -- the equality of gravitational and inertial mass is a consistency requirement of the $S$-matrix, not an independent postulate \cite{Weinberg}. No analogous universality theorem constrains massless spin-1 particles, which couple only to conserved charges specific to a given internal symmetry and can consistently decouple from any given field. This asymmetry between spin-2 and spin-1 is a piece of genuine, substrate-independent field-theoretic structure, and it is what motivates the Gravitational Baseline Principle: gravity is the universal geometric framework that renders all other interactions definable. It is not a peer field within a background but the background itself.
 
-\medskip
-\noindent\textbf{Gravitational Baseline Principle.}
-\emph{Gravity is not a fundamental field with an independent quantum degree of freedom, but a statistical, thermodynamic quantity defined over the energy-momentum of a more fundamental substrate, analogous to temperature. The persistent difficulty in quantizing gravity as a conventional gauge field is not a technical obstacle to be overcome but the expected consequence of treating a derived, statistical quantity as though it were fundamental: there is no more a graviton to find than there is a ``temperature-on.''}
+In this paper, we develop a minimal pre-geometric quantum substrate from which smooth geometry and quantum fields are conjectured to co-emerge. The substrate is defined by a relational density matrix whose entanglement structure encodes emergent spatial connectivity. We identify the precise conditions -- via established convergence theorems for graph Laplacians and the Fierz--Pauli uniqueness theorem for massless spin-2 fields -- under which the Laplace--Beltrami operator, graviton excitations, and thermodynamic gravitational dynamics would arise in the continuum limit, and we test both directly, via exact diagonalization on a concrete substrate, in Secs.~\ref{sec:continuum-geometry} and 5: one condition (linear dispersion) is confirmed, the other (Euclidean metric encoding) is falsified in favor of a specific, holographically-motivated alternative.
 
-\medskip
+\section{The Structural Asymmetry Problem}
 
-This motivates a pre-geometric substrate from which both geometry and the statistical quantity we call gravity co-emerge, rather than quantizing the metric as a fundamental degree of freedom. The same instinct underlies thermodynamic approaches to gravity \cite{Jacobson} and induced-gravity and entropic-gravity constructions \cite{Sakharov,Verlinde}, and entanglement-based constructions of spacetime \cite{VanRaamsdonk,ER=EPR}; here we provide a concrete dynamical substrate with quantitative diagnostics, rather than argue from thermodynamic analogy alone.
-
-We stress what this Principle does, and does not, predict. It does not predict that gravitational effects are unmeasurable: gravitational waves are measured directly \cite{LIGO}, light bending and gravitational redshift are measured routinely, and none of this is in question. What the Principle predicts is that no fundamental gravitational field -- and in particular no graviton -- exists to be found, at this or any scale, because gravity is a derived statistical quantity rather than a field with its own elementary excitation. A natural, falsifiable test of this Principle is therefore to look for graviton-like structure in a candidate pre-geometric substrate and confirm its absence.
-
-A natural question for such a substrate is whether the Heisenberg-chain MI-Laplacian's spectrum reproduces a continuum Laplace--Beltrami operator. We test this hypothesis directly, against system size and against the natural alternative hypothesis, and find that it does not hold as the continuum picture would suggest (Sec.~\ref{sec:heisenberg}); we detail what this implies for the graviton and Pauli--Fierz identification in Secs.~\ref{sec:massless-dispersion}--\ref{sec:graviton-dynamics}. On the Principle above, the absence of graviton-like structure is the expected outcome, not a shortfall of the substrate. The 2D lattice results and spectral-dimension diagnostics are presented with an explicit statement of what they do and do not establish.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Structural Asymmetry}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Einstein's field equations \cite{Einstein},
+Einstein's field equations,
 \begin{equation}
 G_{\mu\nu} = 8\pi G\, T_{\mu\nu},
+\label{eq:einstein}
 \end{equation}
-imply universal coupling: all fields influence and are influenced by the metric. Perturbative quantization expands
+imply universal coupling: all fields influence and are influenced by the metric. Gauge interactions, however, operate only on specific internal degrees of freedom.
+
+Perturbative quantization of gravity requires expanding the metric as $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$ and quantizing $h_{\mu\nu}$ as a spin-2 gauge field. But this procedure presupposes a fixed background $\eta_{\mu\nu}$, violating diffeomorphism invariance at the foundational level. This is the core structural asymmetry: QFT requires a background; GR denies one.
+
+\section{The Gravitational Baseline Principle}
+
+Gravity is not a selective interaction but the universal geometric baseline. All physical systems couple non-linearly to the metric, which defines causal structure and measurement. The Planck scales,
 \begin{equation}
-g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},
+\ell_P = \sqrt{\frac{\hbar G}{c^3}}, \qquad t_P = \sqrt{\frac{\hbar G}{c^5}},
+\label{eq:planck}
 \end{equation}
-and quantizes $h_{\mu\nu}$ as a spin-2 gauge field \cite{DeWitt}, presupposing a fixed background $\eta_{\mu\nu}$ and violating diffeomorphism invariance at the foundational level. This is not a technical obstacle but a conceptual contradiction.
+mark the breakdown of smooth geometry and the onset of pre-geometric structure.
 
-On the Gravitational Baseline Principle, this contradiction is expected: $h_{\mu\nu}$ is being quantized as though it were a fundamental field, when it is instead a statistical quantity defined over a more fundamental substrate's energy-momentum content, analogous to a temperature field. Just as there is no consistent way to promote temperature to a fundamental quantum field with its own elementary excitation, no consistent quantization of $h_{\mu\nu}$ as a fundamental spin-2 field should be expected to exist. The appropriate substrate to quantize is not $h_{\mu\nu}$ itself but whatever more fundamental degrees of freedom give rise to it statistically; below the scale at which that substrate's own structure becomes relevant, the metric expansion above loses physical meaning in the same way that a temperature field loses meaning below the scale of individual molecules.
+The Gravitational Baseline Principle states:
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Relation to Prior Work}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{quote}
+\emph{Gravity is the universal geometric framework that renders all field-theoretic relations definable. It cannot be quantized as a conventional gauge field without violating background independence.}
+\end{quote}
 
-Tensor-network models reproduce spatial slices with fixed graph structure, but typically require an externally imposed geometry. Quantum graphity models introduce dynamical adjacency, though without a direct connection to physical entanglement. In holographic settings, entanglement wedge reconstruction and the Ryu--Takayanagi formula relate geometry to entropy, but rely on AdS/CFT and do not provide a background-independent microscopic substrate. Induced-gravity \cite{Sakharov} and entropic-gravity \cite{Verlinde} approaches argue, on general thermodynamic grounds, that gravity is a statistical residue of more fundamental degrees of freedom rather than a fundamental field in its own right; the present work shares this thesis but tests it on an explicit, numerically tractable substrate rather than arguing from thermodynamic analogy alone.
+\section{Pre-Geometric Substrate Architecture}
 
-The present framework differs in three respects: (i) the adjacency structure is derived directly from physical mutual information, not imposed; (ii) the Laplace--Beltrami operator, coordinate charts, and spectral dimension emerge from the MI spectrum without assuming a manifold, on pre-assigned lattice substrates; and (iii) we test, rather than assume, whether collective excitations of a non-spatial substrate carry graviton-like structure -- a test whose outcome (Secs.~\ref{sec:heisenberg}--\ref{sec:graviton-dynamics}) is negative for the pipeline studied here, consistent with the Gravitational Baseline Principle's prediction that no such structure should be found at any scale. This provides a concrete, dynamical setting in which the idea that gravity is a statistical quantity encoded in quantum correlations, rather than a fundamental field, can be checked quantitatively, rather than only asserted.
+We define the pre-geometric substrate $\mathcal{Q}$ as a background-independent quantum system with state vector $|\Psi\rangle$ in a Hilbert space $\mathcal{H}_\mathcal{Q}$. The density matrix $\rho = |\Psi\rangle\langle\Psi|$ encodes relational structure.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Pre-Geometric Substrate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-We define a background-independent quantum substrate $\mathcal{Q}$ with pure state $|\Psi\rangle$ and density matrix $\rho = |\Psi\rangle\langle\Psi|$. Subsystems $i,j$ carry mutual information
+Mutual information between subsystems $i$ and $j$,
 \begin{equation}
 I(i,j) = S(\rho_i) + S(\rho_j) - S(\rho_{ij}),
+\label{eq:mi}
 \end{equation}
-where $S(\rho) = -\mathrm{Tr}(\rho\ln\rho)$ is the von Neumann entropy. The normalised mutual information defines a symmetric adjacency matrix
+defines a symmetric connectivity matrix $A_{ij}$.
+
+\subsection{Emergent Continuum Geometry}
+\label{sec:continuum-geometry}
+
+A discrete structural operator acts on test functions $\phi(x)$ mapped to subsystem nodes:
 \begin{equation}
-A_{ij} =
-\begin{cases}
-I(i,j)/\max_{k,\ell} I(k,\ell), & i\neq j,\\
-0, & i=j.
-\end{cases}
+\Delta_\mathcal{Q} f_i = \sum_j A_{ij} (f_i - f_j).
+\label{eq:discrete-op}
 \end{equation}
 
-The graph Laplacian $L = D - A$ acts on test functions $\phi$ as
+Whether an operator of this form converges to a continuum Laplace--Beltrami operator is not a matter of isotropy alone; it is governed by a precise body of results in spectral graph theory. If the nodes $i$ are points sampled from a Riemannian manifold $(M,g)$ and the weights are given by a kernel of the geodesic distance, $A_{ij} = K_\epsilon(d_g(x_i,x_j))$ for a suitable kernel $K_\epsilon$ (e.g.\ Gaussian), then as the sampling density grows and the bandwidth $\epsilon\to0$ at an appropriate rate, the graph Laplacian provably converges, pointwise and (under further conditions) spectrally, to the weighted Laplace--Beltrami operator of $M$ \cite{BelkinNiyogi,Singer}:
 \begin{equation}
-(L\phi)_i = -\sum_j A_{ij}(\phi_i - \phi_j).
+\lim_{\epsilon\to0} \Delta_\mathcal{Q} f = \nabla^2 f + O(\epsilon).
+\label{eq:continuum-limit}
 \end{equation}
-Under statistical isotropy, we would expect the continuum limit to yield the Laplace--Beltrami operator,
-\begin{equation}
-\lim_{a\to0} L\phi(x) \overset{?}{=} \Delta_g \phi(x),
-\label{eq:continuum-claim}
-\end{equation}
-with emergent metric $g_{ab}$. We treat Eq.~\eqref{eq:continuum-claim} as the specific hypothesis under test in this paper rather than as an established derivation: no explicit map from $A_{ij}$ to a metric $g_{ab}$ is given, and Sec.~\ref{sec:heisenberg} reports a substrate -- the one case studied here without pre-assigned spatial structure -- for which this limit does not appear to hold in the form written. We emphasize that the present construction, where it does apply, yields an emergent \emph{Euclidean} metric; the emergence of Lorentzian signature is expected to arise from dynamical considerations and is not assumed here.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Numerical Evidence}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This is a rigorous mathematical statement, but its hypotheses are demanding: the edge weights must already be a kernel function of a genuine metric distance on a manifold the nodes are known to sample. In the substrate defined here, $A_{ij}$ is instead fixed directly by the mutual information $I(i,j)$ of Eq.~\eqref{eq:mi}, with no manifold or distance function assumed in advance. Eq.~\eqref{eq:continuum-limit} therefore does \emph{not} follow automatically from the substrate's definition; it holds only if some function of $I(i,j)$ -- for instance an entanglement-based distance $d_\mathcal{Q}(i,j) = -\log\left(I(i,j)/I_{\max}\right)$, in the spirit of proposals relating entanglement entropy to bulk geodesic distance \cite{VanRaamsdonk} -- can be shown to satisfy, at least asymptotically, the metric and kernel conditions required by the theorems of \cite{BelkinNiyogi,Singer}.
 
-We tested robustness by adding symmetric multiplicative noise to each pipeline's adjacency matrix at the $1$--$5\%$ level (30 trials per level; see Table~\ref{tab:stability}). The 2D pipelines' exact degeneracy splits proportionally with noise amplitude, as expected under generic symmetry-breaking, but remains small (below $0.2\%$ even at $5\%$ noise) and the coordinate-chart correlations remain stable throughout; indeed, the perturbation resolves an artifact of the unperturbed construction, in which the exactly degenerate eigenspace admits an arbitrary internal rotation, and instead sharpens the correlation with the true separable coordinate axes (from a mixed $0.90/-0.42$ correlation with $x/y$ at baseline to a nearly pure $0.99/0.00$ once the degeneracy is broken). The Heisenberg-chain linear-vs-quadratic result of Sec.~\ref{sec:heisenberg} is essentially unaffected by this noise: the linear fit is favoured in all 90 trials across all three noise levels, and both $R^2$ values shift by less than $0.001$.
+\subsubsection*{Numerical test}
+
+We test this directly for a minimal, concrete realization of the substrate: the ground state of the spin-1/2 antiferromagnetic Heisenberg chain, $H=\sum_i \mathbf{S}_i\cdot\mathbf{S}_{i+1}$ with periodic boundary conditions, at its quantum critical point, using exact diagonalization at $N=16,18$. This is the natural first test case: it is gapless (a $c=1$ conformal field theory in its continuum limit) and has no coordinates or metric assumed anywhere in its definition -- $I(i,j)$ is computed purely from the many-body ground state's entanglement structure. As a control, we repeat the test on the dimerized chain, $H=\sum_i J_i\, \mathbf{S}_i\cdot\mathbf{S}_{i+1}$ with $J_i=1+\delta(-1)^i$ at $\delta=0.3$, whose ground state is gapped and whose correlations decay exponentially rather than algebraically.
+
+On a ring of $N$ sites, the geodesic (chord) distance between sites separated by $r$ hops is $(N/\pi)\sin(\pi r/N)$, not the hop-count $r$ itself; we use this throughout; it is the distance the convergence theorems of \cite{BelkinNiyogi,Singer} actually refer to for this topology. Table~\ref{tab:metric-test} reports, for both chains, (i) the goodness of fit of $d_\mathcal{Q}(r)$ to a linear function of chord distance (what a Euclidean kernel $A_{ij}\sim e^{-d/\epsilon}$ requires) versus a logarithmic function of chord distance, (ii) the fraction of triples violating the triangle inequality, and (iii) the quality of a classical (Torgerson) embedding of the full distance matrix into 2D Euclidean space.
 
 \begin{table}[h]
 \centering
-\caption{Perturbation stability: mean $\pm$ std over 30 trials at each noise level $\epsilon$, for symmetric multiplicative noise $A_{ij}\to A_{ij}(1+\epsilon\,\xi_{ij})$ with $\xi_{ij}\sim\mathrm{Unif}(-1,1)$.}
-\begin{tabular}{@{}llll@{}}
+\caption{Mutual-information metric-encoding test (Sec.~\ref{sec:continuum-geometry}): candidate distance $d_\mathcal{Q}(i,j)=-\log(I(i,j)/I_{\max})$ against chord distance on the ring, exact diagonalization.}
+\label{tab:metric-test}
+\begin{tabular}{@{}llcccc@{}}
 \toprule
-Pipeline & Metric & $\epsilon=0.01$ & $\epsilon=0.05$ \\
+$N$ & Chain & linear $R^2$ & log $R^2$ & triangle viol.\ & MDS-2D $R^2$ \\
 \midrule
-2D NN & degeneracy split & 0.0004 & 0.0019 \\
-2D NN & corr.\ with $x,y$ & 0.9933 & 0.9932 \\
-Gaussian & degeneracy split & 0.0004 & 0.0019 \\
-Gaussian & corr.\ with $x,y$ & $0.908\pm0.090$ & $0.910\pm0.087$ \\
-Heisenberg & $R^2$ linear & 0.99821 & 0.99821 \\
-Heisenberg & $R^2$ quadratic & 0.9528 & 0.9529 \\
-Heisenberg & linear wins & 30/30 & 30/30 \\
+16 & critical & 0.9471 & 0.9998 & 12.4\% & 0.9313 \\
+16 & gapped ($\delta=0.3$) & 0.9431 & 0.9034 & 6.7\% & 0.9870 \\
+18 & critical & 0.9411 & 0.9999 & 11.0\% & 0.9246 \\
+18 & gapped ($\delta=0.3$) & 0.9499 & 0.8970 & 5.9\% & 0.9845 \\
 \bottomrule
 \end{tabular}
-\label{tab:stability}
 \end{table}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Pipeline comparison}
-\label{sec:pipeline-comparison}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure*}[t]
+\begin{figure}[h]
 \centering
-\includegraphics[width=0.95\textwidth]{pipeline_comparison.png}
-\caption{
-Comparison of two constructions of the MI-Laplacian on a pre-assigned grid.
-Both the Gaussian mutual-information kernel and the nearest-neighbour Laplacian yield identical geometric signatures, including a uniform zero mode, a degenerate first excited pair, and orthogonal coordinate charts.
-This agreement is a cross-check that the two constructions behave consistently on this pre-assigned grid (Sec.~\ref{sec:pipeline-comparison}); as discussed in the text, it does not by itself establish that these coordinates emerge from a non-spatial substrate.
-}
-\end{figure*}
+\includegraphics[width=\textwidth]{mi_metric_encoding_test.png}
+\caption{Candidate distance $d_\mathcal{Q}(r)=-\log(I(r)/I_{\max})$ against chord distance on the ring, for the critical (left) and gapped (right) chain at $N=18$, with linear and logarithmic fits overlaid.}
+\label{fig:metric-test}
+\end{figure}
 
-The Gaussian mutual-information kernel and the nearest-neighbour Laplacian represent two conceptually distinct constructions: one derived from entanglement structure, the other from explicit graph connectivity. Despite their different origins, both pipelines produce identical geometric signatures. The zero mode is uniform, the first excited pair is exactly degenerate, and the corresponding eigenvectors form orthogonal coordinate charts.
+The result is unambiguous, and it does not go the way the Euclidean-kernel hypothesis needs: for the \emph{critical} chain -- the case with no coordinates assumed anywhere -- the logarithmic form fits almost perfectly ($R^2=0.9998$--$0.9999$) and decisively beats the linear form ($R^2=0.94$), consistently at both system sizes. This is not merely "not linear": $d_\mathcal{Q}=-\log I$ growing logarithmically with chord distance is algebraically equivalent to $I(r)$ decaying as a \emph{power law} in chord distance, which is exactly the Calabrese--Cardy result for entanglement-type correlators in a $1+1$D CFT \cite{CalabreseCardy}, and is the same mathematical signature underlying the Ryu--Takayanagi holographic entanglement construction, in which such logarithmic growth reflects geodesic length in a \emph{hyperbolic}, not Euclidean, bulk. For the gapped control, the result flips, exactly as the exponential-decay-of-correlations picture predicts: linear now wins ($R^2\approx0.94$--$0.95$) over logarithmic ($R^2\approx0.90$), and the triangle-inequality violation rate is roughly halved relative to the critical chain (6--7\% versus 11--12\%).
 
-We note an important caveat on both pipelines: the adjacency matrix in each case is built directly from a pre-assigned $(i,j)$ grid -- the Gaussian kernel as a function of Euclidean distance on that grid, and the nearest-neighbour Laplacian as the grid's own connectivity. The agreement between the two pipelines is therefore a meaningful cross-check that our spectral-analysis machinery behaves consistently across distinct adjacency constructions, but it does not by itself demonstrate that spatial coordinates \emph{emerge} from a non-spatial substrate, since those coordinates were supplied as input to both pipelines. The Heisenberg-chain pipeline (Sec.~\ref{sec:heisenberg}) is the case in this paper where no such coordinates are assumed in advance, and is the appropriate place to look for genuine coordinate emergence.
+We read this as follows. The Euclidean-kernel hypothesis of Eq.~\eqref{eq:continuum-limit} is not merely unproven for the critical substrate; it is directly falsified by this candidate distance function, cleanly and reproducibly. But the failure is not featureless: it lands specifically on the functional form associated with a hyperbolic, holographically-flavored geometry rather than a flat one, and it is the gapped, short-range-correlated substrate -- not the critical one -- that behaves as the naive Euclidean picture requires. This sharpens, rather than resolves, the open problem of Sec.~\ref{sec:limitations}: the live question is no longer whether $I(i,j)$ encodes \emph{some} genuine metric, but whether it encodes a \emph{hyperbolic} one, which would call for convergence theorems different from \cite{BelkinNiyogi,Singer} (developed for Euclidean/Riemannian targets) and a correspondingly different notion of what Eq.~\eqref{eq:continuum-limit} should even converge to.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{2D isotropy and coordinate-chart emergence}
-\label{sec:2d-isotropy}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dynamical Law}
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.95\textwidth]{2d_degeneracy.png}
-\caption{
-Spectrum and coordinate correlations for the 2D nearest-neighbour Laplacian.
-The first excited pair is degenerate to machine precision, and the corresponding eigenvectors correlate strongly with the $x$ and $y$ grid coordinates, consistent with orthogonal coordinate charts on this pre-assigned grid (Sec.~\ref{sec:2d-isotropy}).
-}
-\end{figure*}
-
-The first excited pair of eigenvalues is degenerate to machine precision, a hallmark of isotropic two-dimensional geometry. The corresponding eigenvectors correlate strongly with the $x$ and $y$ grid coordinates, confirming that they form orthogonal coordinate charts. A rotation test demonstrates that these eigenvectors transform exactly as expected under a $45^\circ$ rotation, providing direct evidence that the MI-Laplacian reproduces the coordinate structure of a smooth 2D manifold -- \emph{given} that a 2D grid was assumed at construction. As above, this result is best read as a consistency check on the pipeline (it recovers coordinates that were supplied as input, together with the exact degeneracy expected from the $x\leftrightarrow y$ symmetry of a square grid with Neumann boundary conditions) rather than as evidence that coordinates emerge from a non-spatial substrate. Extending this diagnostic to a genuinely non-spatial 2D quantum system is identified as a priority for future work (Sec.~\ref{sec:limitations}).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Eigenmode structure}
-\label{sec:eigenmode-structure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.95\textwidth]{2d_eigenmodes.png}
-\caption{
-Eigenmodes of the 2D nearest-neighbour Laplacian.  
-Modes $1$ and $2$ form the degenerate coordinate pair, while higher modes exhibit harmonic nodal patterns characteristic of a smooth 2D Laplace--Beltrami operator.
-}
-\end{figure*}
-
-The full eigenmode spectrum exhibits the harmonic structure characteristic of a smooth 2D Laplace--Beltrami operator. Modes $1$ and $2$ form the degenerate coordinate pair, while higher modes display sinusoidal nodal patterns consistent with increasing angular and radial quantum numbers. The ordering, symmetry, and nodal structure of these modes match continuum expectations. As in Secs.~\ref{sec:pipeline-comparison}--\ref{sec:2d-isotropy}, we read this as confirmation that the MI-Laplacian machinery correctly reproduces the full harmonic content of a smooth 2D Laplace--Beltrami operator \emph{given} the pre-assigned grid -- a further validation of the pipeline -- rather than as independent evidence that this harmonic structure emerges from a non-spatial substrate.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.95\textwidth]{gaussian_eigenmodes.png}
-\caption{
-Eigenmodes of the Gaussian mutual-information kernel.  
-The harmonic structure matches that of the nearest-neighbour Laplacian, confirming the internal consistency of the two constructions on this pre-assigned grid (Sec.~\ref{sec:eigenmode-structure}).
-}
-\end{figure*}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Spectral dimension}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.95\textwidth]{spectral_dimension.png}
-\caption{
-Spectral dimension flow extracted from the heat-kernel trace.  
-Two-dimensional substrates exhibit a plateau at $d_s \simeq 2$, while the Heisenberg-chain MI Laplacian approaches $d_s \simeq 1$, correctly identifying the underlying dimensionality.
-}
-\end{figure*}
-
-The spectral dimension $d_s(t)$ is extracted from the return probability of a diffusion process on the MI-Laplacian. All 2D substrates exhibit the same three-regime structure: a UV cutoff region where $d_s \to 0$, an intermediate plateau at $d_s \simeq 2$, and an IR suppression due to finite volume. In contrast, the Heisenberg-chain MI Laplacian approaches $d_s \simeq 1$, correctly identifying the underlying 1D connectivity of the chain. Given the results of Sec.~\ref{sec:heisenberg}, we note that $d_s\simeq1$ is consistent with the chain being effectively one-dimensional in its correlation structure -- as expected for any 1D critical spin chain -- and should not be read on its own as confirming a smooth 1D continuum limit specifically.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Heisenberg MI spectrum}
-\label{sec:heisenberg}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.95\textwidth]{heisenberg_spectrum.png}
-\caption{
-\textbf{Left:} reference continuum-limit check for a classical 1D nearest-neighbour lattice Laplacian ($N=20,40,80$; not derived from mutual information), included as a pipeline sanity check. \textbf{Right:} the Heisenberg-chain MI-Laplacian at $N=32$, with linear and quadratic fits to the four lowest nonzero eigenvalues overlaid. The linear fit is visibly and quantitatively superior ($R^2=0.9999$ vs.\ $0.9698$); see Table~\ref{tab:dispersion} for all system sizes.
-}
-\end{figure*}
-
-The mutual-information Laplacian extracted from the antiferromagnetic Heisenberg chain is the pipeline in this paper where no spatial embedding is assumed \emph{a priori}: the adjacency matrix is built entirely from the ground state's own entanglement structure. It is therefore the appropriate place to test, rather than assume, whether smooth geometric structure emerges from a non-spatial substrate.
-
-A natural hypothesis, motivated by the continuum Laplace--Beltrami operator on a 1D manifold, is quadratic eigenvalue scaling, $\lambda_k\propto k^2$. We test this against the alternative hypothesis $\lambda_k\propto k$ using exact diagonalization ($N=12,16$) extended by DMRG (validated against exact diagonalization to $\sim10^{-6}$ at $N=12$) to $N=24,28,32$. Table~\ref{tab:dispersion} reports both fits at each system size.
-
-\begin{table}[h]
-\centering
-\caption{Goodness of fit ($R^2$) for linear ($\lambda_k=ak+b$) versus quadratic ($\lambda_k=ak^2+b$) dispersion, using the four lowest nonzero eigenvalues at each system size.}
-\begin{tabular}{@{}lcc@{}}
-\toprule
-$N$ & Linear-in-$k$ $R^2$ & Quadratic-in-$k$ $R^2$ \\
-\midrule
-12 & 0.9982 & 0.9528 \\
-16 & 0.9993 & 0.9598 \\
-20 & 0.9997 & 0.9639 \\
-24 & 0.9999 & 0.9665 \\
-28 & 0.9999 & 0.9684 \\
-32 & 0.9999 & 0.9698 \\
-\bottomrule
-\end{tabular}
-\label{tab:dispersion}
-\end{table}
-
-The linear hypothesis is favoured at every system size, and the gap between the two fits \emph{widens} rather than narrows as $N$ increases -- the opposite of what would be expected if the discrepancy at small $N$ were simply a finite-size correction to an underlying $k^2$ law. The companion finite-size-scaling hypothesis, $\lambda_1\propto1/N^2$, fares no better: a free power-law fit to $\lambda_1(N)$ over $N=12$--$32$ gives $\lambda_1\propto N^{-b}$ with $b=0.883$ ($R^2=0.99992$), consistent with $b\approx1$, not $b=2$.
-
-We interpret this result as follows. An exponent $b\approx0.88$--$1$, together with linear-in-$k$ dispersion, is not the expected signature of a smooth Riemannian manifold; it is instead consistent with the scaling of an observable tied to the operator content of a $c=1$ conformal critical point, of which the isotropic Heisenberg chain is a standard example. This reading is supported by a separate, unpublished analysis of ours using an independent (normalized) Laplacian construction at the same critical point, which identified a closely related exponent ($b=0.891$) and a logarithmic finite-size correction attributable to the marginally irrelevant operator at the SU(2) point. Fitting the same log-corrected form, $\lambda_1(N)=\frac{a}{N}(1+\frac{c}{\ln N})$, to the present data improves $R^2$ from $0.99992$ to $0.99997$, with residuals showing the same signed-arc pattern identified in that analysis as the signature of this correction. We take this cross-validation, across two independent Laplacian constructions, as evidence that the MI-Laplacian is a real and reproducible diagnostic of quantum critical structure -- but not, on the present evidence, of emergent continuum Euclidean geometry. This interpretation carries through Secs.~\ref{sec:massless-dispersion} and \ref{sec:graviton-dynamics} below.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Cross-model universality test}
-\label{sec:cft-test}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The interpretation above makes a sharp, further prediction: if the exponent $b$ tracks critical/CFT structure rather than a universal geometric constant, it should vary systematically across models and across parameters within a single universality class, in a way that a genuinely geometric quantity should not. We test this directly using the same combinatorial-Laplacian pipeline as Sec.~\ref{sec:heisenberg} ($N=8$--$16$, exact diagonalization), on four critical points: the XXZ chain at $\Delta=1.0$ (isotropic Heisenberg), $\Delta=0.5$, and $\Delta=0.0$ (free fermion) -- three points on the same $c=1$ critical line with different Luttinger parameters $K=0.5,0.75,1.0$ respectively \cite{Giamarchi} -- and the transverse-field Ising model (TFIM) at its critical point, a different universality class ($c=1/2$).
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.95\textwidth]{cft_universality_test.png}
-\caption{
-\textbf{Left:} the Laplacian finite-size exponent $b$ (from $\lambda_1\propto N^{-b}$) against the mutual information's own directly measured real-space decay exponent $\eta_{MI}$ (from $I(r)\propto r^{-\eta}$ at $N=16$) -- two independent calculations on the same ground state, correlated at $r=0.99$ across four models. \textbf{Right:} within the XXZ line alone (fixed $c=1$, varying only the interaction strength $\Delta$), $b$ varies smoothly and near-linearly with the standard Luttinger parameter $K$ ($R^2=0.996$).
-}
-\end{figure*}
-
-\begin{table}[h]
-\centering
-\caption{Laplacian finite-size exponent $b$ and directly measured MI-decay exponent $\eta_{MI}$ across models, using $N=8$--$16$ for $b$ and $N=16$ for $\eta_{MI}$.}
-\begin{tabular}{@{}lccc@{}}
-\toprule
-Model & $b$ & $\eta_{MI}$ & $K$ \\
-\midrule
-XXZ $\Delta=1.0$ (Heisenberg) & $0.835$ & $2.438$ & $0.50$ \\
-XXZ $\Delta=0.5$              & $0.549$ & $2.210$ & $0.75$ \\
-XXZ $\Delta=0.0$ (free fermion) & $0.196$ & $1.638$ & $1.00$ \\
-TFIM (critical)               & $-0.085$ & $1.146$ & -- \\
-\bottomrule
-\end{tabular}
-\label{tab:cft-test}
-\end{table}
-
-Three results follow from Table~\ref{tab:cft-test}. First, $b$ and $\eta_{MI}$ -- computed independently, one from the Laplacian spectrum and one directly from the real-space decay of the mutual information itself -- agree with each other at $r=0.99$ across all four models, despite neither calculation being tuned to match the other. Second, restricted to the three XXZ points, which share the same central charge and differ only in the interaction strength $\Delta$, $b$ varies smoothly and almost linearly with $K$ ($R^2=0.996$); a universal geometric quantity tied only to the chain's dimensionality would not be expected to vary along a line of fixed central charge. Third, the transverse-field Ising point does not merely shift $b$ to a different value but flips its sign: $\lambda_1$ grows with $N$ for TFIM, where it shrinks for every point on the XXZ line. This qualitative reversal tracks a genuine change of universality class ($c=1/2$ vs.\ $c=1$) and operator content, rather than any change in the chain's real-space dimensionality, which is identical in all four cases.
-
-Taken together, these results are additional, independent evidence for the interpretation of Sec.~\ref{sec:heisenberg}: the MI-Laplacian's finite-size exponent tracks the specific critical/CFT structure of the underlying quantum model, not a universal signature of one-dimensional geometry.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Departure from criticality}
-\label{sec:dimerization-test}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The interpretation of Secs.~\ref{sec:heisenberg}--\ref{sec:cft-test} makes a further prediction that can be tested within a single model: if the anomalous exponent $b\approx0.88$ is a signature of criticality rather than of one-dimensional geometry as such, it should relax toward the genuinely geometric value $b=2$ once the system is gapped, since a gapped ground state has a finite correlation length and its mutual-information matrix becomes short-range, allowing the graph Laplacian to approximate an actual local differential operator. We test this by dimerizing the Heisenberg chain, $H = \sum_i J_i (S_i^xS_{i+1}^x + S_i^yS_{i+1}^y + S_i^zS_{i+1}^z)$ with alternating bond strength $J_i = 1+\delta(-1)^i$, using the same combinatorial-Laplacian pipeline as Secs.~\ref{sec:heisenberg} and \ref{sec:cft-test} ($N=8$--$16$, exact diagonalization). At $\delta=0$ this is the critical point studied throughout this paper; for $\delta\neq0$ the ground state is gapped.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.95\textwidth]{dimerization_crossover_test.png}
-\caption{
-\textbf{Left:} the finite-size exponent $b$ (from $\lambda_1\propto N^{-b}$) as a function of dimerization strength $\delta$, crossing over from the critical value ($b=0.835$) toward the continuum-Laplacian value ($b=2$) as the gap opens. \textbf{Right:} the real-space mutual information $I(r)$ at $N=16$ for each $\delta$; the power-law tail at criticality steepens into a sharp cutoff once the system is gapped.
-}
-\end{figure*}
-
-\begin{table}[h]
-\centering
-\caption{Finite-size exponent $b$ and fitted correlation length $\xi$ (from an exponential fit to $I(r)$ at $N=16$) as a function of dimerization strength $\delta$.}
-\begin{tabular}{@{}lcc@{}}
-\toprule
-$\delta$ & $b$ & $\xi$ \\
-\midrule
-0.0 (critical) & 0.835 & -- (power-law) \\
-0.1 & 1.452 & 0.416 \\
-0.3 & 1.818 & 0.280 \\
-0.6 & 1.919 & 0.187 \\
-\bottomrule
-\end{tabular}
-\label{tab:dimerization}
-\end{table}
-
-Table~\ref{tab:dimerization} shows a clean, monotonic crossover: $b$ rises from $0.835$ at criticality to $1.919$ at the strongest dimerization tested, approaching but not yet reaching the continuum value $b=2$ within the system sizes accessible here. The fitted correlation length $\xi$ shrinks correspondingly, from long-range at $\delta=0$ to $\xi\approx0.19$ lattice spacings at $\delta=0.6$. The raw mutual information values make the same point without any fitting: at $\delta=0.6$, $I(r)$ falls from $1.36$ at $r=1$ to $6.5\times10^{-3}$ at $r=2$ to $7\times10^{-5}$ at $r=3$, reaching numerical zero by $r=6$; at criticality, $I(r)$ remains $\sim10^{-2}$ even at $r=8$, the largest separation available at this system size.
-
-This is a stronger result than a mere disappearance of the anomalous exponent away from criticality would have been: the exponent does not simply become undefined or noisy once the system is gapped, it moves systematically toward the specific value that a genuinely local, short-range graph Laplacian is expected to produce. This provides a mechanistic account of why the pre-assigned-lattice pipelines of Secs.~\ref{sec:pipeline-comparison}--\ref{sec:eigenmode-structure} reproduce continuum-Laplacian behavior so cleanly: those substrates are short-range by construction, occupying the same regime as the gapped end of this crossover, whereas the Heisenberg chain at its critical point sits at the opposite, long-range end where anomalous CFT scaling dominates instead.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Massless dispersion}
-\label{sec:massless-dispersion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.95\textwidth]{graviton_dispersion.png}
-\caption{
-Normalised dispersion relation $\omega_k = \sqrt{\lambda_k}\,N/\pi$, computed from a classical 1D nearest-neighbour lattice Laplacian ($N=20,40,80$), included as a reference: this quantity is not computed from the mutual-information matrix or the Heisenberg ground state, and its convergence to $\omega=k$ is a generic property of any 1D nearest-neighbour lattice Laplacian, unrelated to the entanglement substrate studied here.
-}
-\end{figure*}
-
-A massless dispersion, $\omega_k = \sqrt{\lambda_k}\,N/\pi \to \omega=k$ with $O(1/N^2)$ corrections, would be the signature expected if $\lambda_k\propto k^2/N^2$, and would be consistent with a linearised Pauli--Fierz (massless spin-2) dispersion. Given the scaling established in Sec.~\ref{sec:heisenberg}, $\lambda_k\propto k\,N^{-0.88}$, $\omega_k$ does not converge to a fixed, $N$-independent function of $k$ in this way, and a massless-dispersion interpretation does not follow from the data for this substrate -- consistent with the Gravitational Baseline Principle's prediction that no such fundamental excitation should be found.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Absence of Graviton Structure}
-\label{sec:graviton-dynamics}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-A conventional path toward a graviton would linearise small perturbations of a would-be emergent metric, $g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$, arising from variations in $A_{ij}$ projected onto smooth coordinate functions, and project the substrate dynamics onto a transverse-traceless sector to obtain a Pauli--Fierz action,
+We propose a minimal background-independent evolution equation:
 \begin{equation}
-S_{\rm PF} = \frac12 \int d^4x\, h^{\mu\nu}\mathcal{E}_{\mu\nu}{}^{\rho\sigma}h_{\rho\sigma},
+\frac{d\rho}{dt} = -i[H_\mathcal{Q}, \rho],
+\label{eq:evolution}
 \end{equation}
-with $\mathcal{E}$ the Lichnerowicz operator. We record this equation to make explicit what such a program would require, not because we expect it to succeed. On the Gravitational Baseline Principle, it should not: if gravity is a statistical quantity defined over a more fundamental substrate, rather than a fundamental field, then no elementary excitation of $h_{\mu\nu}$ -- no graviton -- should exist to find, at this or any scale, for the same reason no elementary excitation of a temperature field exists to find.
+with Hamiltonian
+\begin{equation}
+H_\mathcal{Q} = \sum_{i,j} K(A_{ij})\, \sigma_i \otimes \sigma_j,
+\label{eq:hamiltonian}
+\end{equation}
+where $K$ is a monotonic kernel of entanglement strength. Because $A_{ij}$ depends on $\rho$, the evolution is self-consistent and non-linear.
 
-Two conditions would need to hold for $S_{\rm PF}$ to describe an actual excitation of this substrate, and neither does: (i) the substrate's collective dispersion would need to be the massless, continuum-Laplacian limit discussed in Sec.~\ref{sec:massless-dispersion}, which Sec.~\ref{sec:heisenberg} shows is not established; and (ii) a scalar chain's dispersion relation would need to carry spin-2 tensorial content, which requires an explicit transverse-traceless projection not attempted here and which we have no reason to expect would succeed if attempted. We regard both absences as consistent with, rather than a shortfall against, the Principle stated in Sec.~\ref{sec:intro}. A further, more direct test -- extending the substrate to two or more dimensions with genuine directional structure and explicitly checking for transverse-traceless content -- is identified in Sec.~\ref{sec:limitations} as a way to sharpen this prediction rather than to search for a result we expect not to find.
+\section{Emergent Graviton Dynamics}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Small perturbations of the emergent metric,
+\begin{equation}
+g_{\mu\nu}(x) = \eta_{\mu\nu} + h_{\mu\nu}(x),
+\label{eq:perturbation}
+\end{equation}
+would arise from variations in $A_{ij}$ projected onto smooth coordinate functions, once the continuum limit of Sec.~\ref{sec:continuum-geometry} is established. Two further conditions must then hold before such an $h_{\mu\nu}$ can be identified with a graviton. First, the substrate's low-energy collective excitations must transform as a symmetric rank-2 tensor under an emergent Lorentz group -- not established here, since the construction of Sec.~\ref{sec:continuum-geometry} produces at most a Euclidean, not Lorentzian, continuum limit (Sec.~\ref{sec:limitations}). Second, the substrate's dynamics must possess an emergent gauge redundancy $h_{\mu\nu} \to h_{\mu\nu} + \partial_\mu \xi_\nu + \partial_\nu \xi_\mu$, reflecting the diffeomorphism invariance of the geometry $h_{\mu\nu}$ perturbs.
+
+If both conditions hold, the form of the resulting action is then forced, not assumed. Fierz and Pauli showed that requiring a ghost-free (no negative-norm states), Lorentz-covariant, two-derivative kinetic term for a symmetric tensor with this gauge redundancy fixes the quadratic action uniquely, up to overall normalization, to the Fierz--Pauli/Lichnerowicz form \cite{FierzPauli}; no other combination of index contractions is consistent, and adding a naive mass term reintroduces a ghost (the Boulware--Deser mode) unless tuned to the Fierz--Pauli combination itself \cite{Hinterbichler}. In this sense the \emph{form} of the graviton action, if a graviton is present in this substrate at all, is not a free choice but a consequence of symmetry once the two conditions above are met. What remains open is deriving those two conditions from the substrate's own dynamics, Eqs.~\eqref{eq:evolution}--\eqref{eq:hamiltonian}, rather than assuming them; together with the continuum-limit problem of Sec.~\ref{sec:continuum-geometry}, we regard this as the framework's principal unfinished derivation, not a demonstrated result.
+
+\subsubsection*{Numerical test of the first condition}
+
+The first condition -- emergent Lorentz covariance -- has a testable minimal consequence even before any tensor structure is established: the substrate's low-energy excitation \emph{energies} must obey a linear (massless relativistic), not quadratic (non-relativistic/Schr\"odinger), dispersion relation. For the critical Heisenberg chain this is a classical result: des Cloizeaux and Pearson showed exactly that the antiferromagnetic chain's elementary excitations (spinons) have dispersion $\omega(k) = (\pi/2)|\sin k|$ in the thermodynamic limit \cite{DesCloizeauxPearson} -- linear near $k=0$, with the finite-size consequence that the lowest excitation gap above the ground state scales as $E_{\rm gap}(N)\sim \pi v/N$ with velocity $v=\pi/2$, i.e.\ \emph{linearly} in $1/N$, not $1/N^2$.
+
+We verify this directly by exact diagonalization, using a fixed-total-$S^z$ symmetry sector to reach $N=12$ through $26$ (cross-validated against full-Hilbert-space diagonalization to machine precision at smaller $N$). Table~\ref{tab:dispersion-test} and Fig.~\ref{fig:dispersion-test} report the results, alongside the same gapped dimerized chain as a control.
+
+\begin{table}[h]
+\centering
+\caption{Finite-size gap scaling $E_{\rm gap}(N)$, critical vs.\ gapped chain, $N=12$--$26$, exact diagonalization.}
+\label{tab:dispersion-test}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Chain & Fit & Result \\
+\midrule
+Critical & $E_{\rm gap}=A/N^p$ (free) & $A=3.884\pm0.010$, $p=0.962\pm0.001$, $R^2=0.999994$ \\
+Critical & $+$ log-correction & $A=4.797\pm0.004$, $R^2=0.999999$ \\
+Critical & fixed $p=2$ (non-relativistic) & $R^2=0.009$ \\
+Critical & exact (des Cloizeaux--Pearson) & $p=1$, $A=\pi^2/2=4.935$ \\
+Gapped ($\delta=0.3$) & $E_{\rm gap}=C+A/N^p$ & $C=0.8099\pm0.0000$ (finite $N\to\infty$ gap) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{lorentz_dispersion_test.png}
+\caption{Left: finite-size gap $E_{\rm gap}(N)$ for the critical chain (log-log), with the free power-law fit ($p=0.962$) against a fixed quadratic hypothesis ($p=2$). Right: critical vs.\ gapped chain, linear axes; the critical gap extrapolates toward zero while the gapped control saturates at a finite spin gap.}
+\label{fig:dispersion-test}
+\end{figure}
+
+The free fit gives $p=0.962\pm0.001$ ($R^2=0.999994$), and including the log-correction expected from the marginally irrelevant operator at the SU(2) point brings $R^2$ to $0.999999$ with an amplitude $A=4.80$, close to the exact value $\pi^2/2=4.935$ (the residual $\sim3\%$ discrepancy is consistent with sub-leading finite-size corrections beyond the leading log term). A fixed quadratic hypothesis, by contrast, is decisively excluded ($R^2=0.009$). The gapped control converges cleanly to a finite gap ($C=0.8099$, essentially zero residual uncertainty) rather than vanishing.
+
+This confirms, to high numerical precision, that the critical substrate's excitation spectrum has the linear, Lorentz-consistent dispersion the first condition above requires -- not as an assumption but as an exactly solvable, independently verified property of the Heisenberg chain \cite{DesCloizeauxPearson}. It is a necessary, not sufficient, condition: linear dispersion of scalar excitation energies is required for, but does not by itself establish, the full statement that low-energy excitations transform as a symmetric rank-2 tensor under an emergent Lorentz \emph{group} (which would additionally require, e.g., a Lorentz-covariant operator algebra and an emergent light cone in the appropriate correlation functions). We regard this as genuine partial progress on the first of the two conditions above -- in contrast to the second (emergent gauge redundancy), which we have not attempted to test here and for which we are not aware of an analogous minimal numerical diagnostic.
+
 \section{Thermodynamic Gravity}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Following Jacobson \cite{Jacobson}, Einstein's equations arise as an equation of state. Fluctuations generate higher-curvature corrections
+Following Jacobson's original argument \cite{Jacobson}, Einstein's equations emerge as a thermodynamic equation of state from the Clausius relation applied to local Rindler horizons, given the Bekenstein--Hawking proportionality between horizon entropy and area. A later reformulation replaces this thermal-horizon argument with a purely entanglement-theoretic one, and is substantially closer in kind to a substrate defined, as here, directly in terms of mutual information: Jacobson showed that the linearized Einstein equation is equivalent to the statement that vacuum entanglement entropy in small geodesic balls is stationary under first-order variations of the state \cite{JacobsonEntanglement}, and Faulkner, Guica, Hartman, Myers, and Van Raamsdonk derived the linearized Einstein equation directly from the first law of entanglement entropy in holographic CFTs \cite{Faulkner}. Both results ground gravitational dynamics in constraints on entanglement entropy rather than in a postulated horizon temperature.
+
+Taking this correspondence seriously, fluctuations of the substrate would generate higher-curvature corrections,
 \begin{equation}
-S_{\rm eff} = \frac{1}{16\pi G}\int d^4x\sqrt{-g}\,
-(R + \alpha R^2 + \beta R_{\mu\nu}R^{\mu\nu} + \cdots).
+S_{\rm eff} = \frac{1}{16\pi G} \int d^4x \sqrt{-g}\, \left(R + \alpha R^2 + \beta R_{\mu\nu} R^{\mu\nu} + \cdots \right),
+\label{eq:effective-action}
 \end{equation}
-This thermodynamic derivation is, to our knowledge, the closest existing precedent for the Gravitational Baseline Principle as stated in Sec.~\ref{sec:intro}: it treats the Einstein equations themselves as an equation of state -- a statistical, coarse-grained relation -- rather than as the equation of motion of a fundamental field, in the same spirit as induced- and entropic-gravity approaches \cite{Sakharov,Verlinde}. Neither the higher-curvature action above nor the coefficients $\alpha,\beta$ are derived from the mutual-information substrate studied in this paper; the connection recorded here is one of shared thesis, not a demonstrated derivation from this substrate.
+with coefficients determined by the entanglement spectrum. We emphasize that \cite{JacobsonEntanglement} and \cite{Faulkner} establish this correspondence in specific settings -- respectively, small geodesic balls in an assumed maximally symmetric vacuum, and holographic CFTs with a semiclassical bulk dual -- neither of which has been shown to apply to the substrate of Sec.~4. Extending either derivation to a generic mutual-information matrix $A_{ij}$ with no assumed symmetry or holographic dual is a concrete, well-posed problem, not a result claimed here.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Consequences of the Principle}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Phenomenological Consequences}
 
-We record the following as consequences that follow from the Gravitational Baseline Principle itself (Sec.~\ref{sec:intro}), rather than from the specific numerics of Secs.~\ref{sec:heisenberg}--\ref{sec:graviton-dynamics}; none is established by this paper's numerics, and each is stated here as a further, independently falsifiable prediction of the Principle.
+\begin{itemize}
+\item \textbf{Holographic noise:} Mutual-information encoding implies an irreducible noise floor in precision interferometry, in the spirit of the holographic-noise proposal of Hogan \cite{Hogan}, whose predicted transverse noise spectrum depends only on the Planck scale and detector geometry, independent of the specific microscopic model -- making it a comparatively model-independent test of substrates of this general class, not only the one proposed here.
+\item \textbf{Curvature corrections:} Higher-order terms may affect black hole quasi-normal modes and early-universe cosmology.
+\item \textbf{Modified dispersion:} Collective excitations satisfy $\omega^2 = k^2[1+\epsilon(k)]$, with $\epsilon(k)$ suppressed by the microscopic scale, of the general form already constrained by existing tests of Lorentz invariance \cite{Liberati}.
+\end{itemize}
 
-\emph{No graviton at any accessible scale.} If gravity is a statistical quantity rather than a fundamental field, no elementary gravitational excitation should be found by any future experiment, at any energy, in the same sense that no experiment will find an elementary quantum of temperature. This is a stronger and more falsifiable claim than "no graviton has yet been found," and is falsified outright by any confirmed direct detection of a graviton.
+\section{Relation to Existing Approaches}
 
-\emph{Entropy bounds, not field equations, as fundamental.} On this Principle, the Bekenstein--Hawking entropy \cite{Bekenstein} and the holographic principle are expected to be closer to fundamental statements than the Einstein field equations themselves, with the latter recoverable as an equation of state \cite{Jacobson} rather than as the equation of motion of an independently existing field.
+Unlike Loop Quantum Gravity or Causal Set Theory, which quantize classical geometric structures, this framework treats geometry as emergent from non-spatial quantum information. It shares conceptual ground with ER=EPR \cite{ERPR} and entanglement-induced geometry \cite{VanRaamsdonk}, but provides a concrete dynamical substrate.
 
-\emph{Holographic noise.} The entanglement-defined connectivity of the substrate implies an irreducible noise floor in interferometry, of the kind discussed in the entropic-gravity literature \cite{Verlinde}; unlike a modified graviton dispersion, this is a statement about the statistical substrate's own resolution limits, not about corrections to a fundamental field.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Limitations and Future Directions}
+\section{Limitations and Outlook}
 \label{sec:limitations}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The present work establishes emergent Euclidean geometry only for the pre-assigned-lattice pipelines, where it functions as a validation of the analysis pipeline rather than independent evidence of emergence (Sec.~\ref{sec:pipeline-comparison}--\ref{sec:2d-isotropy}); the emergence of Lorentzian signature remains a further, separate open problem. For the Heisenberg-chain pipeline -- the one substrate studied without assumed spatial structure -- the results of Sec.~\ref{sec:heisenberg} indicate quantum critical scaling rather than continuum geometric emergence, and the massless-dispersion and Pauli--Fierz identifications discussed in Secs.~\ref{sec:massless-dispersion}--\ref{sec:graviton-dynamics} are not supported by this substrate. The following concrete steps follow directly:
+This framework is conceptual and minimalistic. A full treatment requires:
+\begin{itemize}
+\item explicit reconstruction of Lorentzian signature,
+\item derivation of matter field algebras,
+\item analysis of renormalization behavior,
+\item numerical simulation of the substrate's own proposed evolution equation, Eqs.~\eqref{eq:evolution}--\eqref{eq:hamiltonian} -- the tests reported in Secs.~\ref{sec:continuum-geometry} and 5 use a static many-body ground state (the Heisenberg chain) as a concrete stand-in substrate, not a simulation of this self-consistent non-linear dynamical law itself,
+\item a proof, or falsification, that some function of the mutual information $I(i,j)$ satisfies the metric and kernel conditions required by \emph{hyperbolic}-target convergence theorems, given that Sec.~\ref{sec:continuum-geometry}'s numerical test rules out the originally hoped-for Euclidean target for the one substrate tested (the critical Heisenberg chain) and instead favors a logarithmic, holographically-flavored candidate -- the framework's central open mathematical gap now has a specific, narrower shape, but remains open,
+\item establishing, from the substrate's own dynamics rather than by assumption, the emergent gauge redundancy that Sec.~5 identifies as its second prerequisite for the Fierz--Pauli uniqueness argument to apply. (The first prerequisite, linear/Lorentz-consistent dispersion, is now verified for the critical chain's excitation spectrum, Sec.~5; whether this extends to genuine rank-2 tensor transformation under a full emergent Lorentz group remains untested.)
+\item extending the numerical tests of Secs.~\ref{sec:continuum-geometry} and 5 beyond the 1D Heisenberg chain -- to other universality classes, and eventually to a genuinely higher-dimensional, non-spatial quantum substrate, which is also required before the hyperbolic-geometry reading above can be checked against an actual bulk reconstruction rather than a single radial profile.
+\end{itemize}
 
-\begin{enumerate}
-\item A genuine, non-circular test of coordinate emergence in two or more dimensions, using a 2D (or higher) quantum system whose MI matrix is computed with no spatial grid assumed, analogous to the 1D Heisenberg-chain construction.
-\item A first-principles derivation of why the Heisenberg-chain MI-Laplacian tracks critical/CFT scaling dimensions rather than a continuum Laplacian. Sec.~\ref{sec:cft-test} provides cross-model evidence \emph{that} it does so (the exponent varies with the Luttinger parameter and with universality class), and this is corroborated by a separate, unpublished analysis of ours using an independent Laplacian construction; a derivation of \emph{why} the combinatorial graph Laplacian of the MI matrix should couple to these CFT data in the first place remains open.
-\item An explicit derivation of Eq.~\eqref{eq:continuum-claim}, including a constructive map from $A_{ij}$ to a metric $g_{ab}$, in any substrate where the continuum-limit claim is to be made.
-\item An explicit construction of tensorial (spin-2) structure, with a transverse-traceless projection carried out on the substrate itself, would sharpen the test in Sec.~\ref{sec:graviton-dynamics}: on the Gravitational Baseline Principle we expect this construction to continue finding no fundamental spin-2 excitation, and this remains to be checked explicitly on a substrate with genuine directional structure.
-\end{enumerate}
+Nonetheless, the model provides a coherent path toward unifying GR and QFT without quantizing the metric, and the numerical tests of Secs.~\ref{sec:continuum-geometry} and 5 show that its open problems are not merely unexamined -- where tested, they resolve into specific, further falsifiable claims (linear dispersion: confirmed; Euclidean metric encoding: falsified in favor of a specific, identifiable alternative) rather than remaining wholly speculative.
 
-The analysis remains restricted to static substrates, and a full dynamical equation for the evolution of the mutual-information matrix has not yet been derived. Matter fields are not included, and the coupling between emergent geometry and emergent matter degrees of freedom requires further study.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-The framework differs from Loop Quantum Gravity and Causal Set Theory in that geometry is not quantized but is tested for emergence from non-spatial quantum information. It shares conceptual ground with ER=EPR and Van Raamsdonk, though its central thesis -- that gravity is a statistical quantity rather than a fundamental field -- sits closer to the thermodynamic and entropic-gravity tradition of Jacobson, Sakharov, and Verlinde \cite{Jacobson,Sakharov,Verlinde}. On the results reported here, the framework substantiates that thesis at the level of a quantum-critical MI diagnostic that finds no graviton-bearing structure, consistent with the Principle's prediction, rather than at the level of a demonstrated continuum-geometric substrate. We regard this as the defensible current state of the program, with the specific open steps of Sec.~\ref{sec:limitations} available to sharpen and further test the Principle's predictions.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We have argued that the Gravitational Baseline Principle resolves the GR--QFT structural asymmetry by identifying gravity not as a fundamental field but as a statistical, thermodynamic quantity defined over a more fundamental substrate, analogous to temperature. A minimal pre-geometric substrate yields, on pre-assigned 2D lattices: a Laplace--Beltrami-consistent operator; isotropic 2D geometry with exact degeneracy; and orthogonal coordinate charts -- results we present as validating the analysis pipeline rather than as independent evidence of emergence, since spatial coordinates are supplied as input to these constructions. For the Heisenberg-chain substrate, the one case studied without assumed spatial structure, DMRG calculations extended to $N=32$ and validated against exact diagonalization show linear-in-$k$ dispersion and $\lambda_1\propto N^{-0.88}$, both favoured over the quadratic/$N^{-2}$ forms motivated by a continuum-Laplacian picture, with a residual structure matching the known marginally irrelevant operator at the SU(2) Heisenberg point -- cross-validated against an independent Laplacian construction in a separate, unpublished analysis of ours. This reading is reinforced by two further tests: the same exponent varies systematically with the Luttinger parameter and universality class across several critical spin models (Sec.~\ref{sec:cft-test}), and, within the Heisenberg chain itself, dimerizing away from criticality drives the exponent continuously from its critical value toward the genuinely geometric value $b=2$ as the correlation length shortens (Sec.~\ref{sec:dimerization-test}) -- a mechanistic account of why the pre-assigned-lattice pipelines succeed where the critical chain does not. No massless-graviton or Pauli--Fierz structure is found, which on the Principle stated in Sec.~\ref{sec:intro} is the expected outcome rather than a shortfall: no more a graviton should be found here than a fundamental quantum of temperature. The framework establishes emergent Euclidean geometry only at the level of a validated analysis pipeline on pre-assigned lattices, and a genuine, quantitatively cross-checked diagnostic of quantum critical structure on a non-spatial substrate that is consistent with, though does not by itself prove, the Principle's central claim. Lorentzian extension, a non-circular demonstration of coordinate emergence in two or more dimensions, and a direct test for spin-2 structure on a higher-dimensional substrate remain the next steps toward sharpening that test, as detailed in Sec.~\ref{sec:limitations}.
+The Gravitational Baseline Principle resolves the structural asymmetry between GR and QFT by recognizing gravity as the universal geometric framework rather than a conventional gauge field -- a universality that, for the spin-2 case, is not merely asserted but follows from Weinberg's $S$-matrix argument \cite{Weinberg}. A pre-geometric quantum substrate with relational entanglement structure is proposed as the setting in which emergent geometry, graviton excitations, and thermodynamic gravitational dynamics would arise. Using established convergence theorems for graph Laplacians \cite{BelkinNiyogi,Singer} and the Fierz--Pauli uniqueness theorem \cite{FierzPauli,Hinterbichler}, we identified exactly what these claims require -- a genuine metric distance encoded in the mutual-information matrix $A_{ij}$, and an emergent Lorentz-covariant gauge symmetry -- and tested both directly on a concrete substrate, the critical antiferromagnetic Heisenberg chain, by exact diagonalization. The dispersion prerequisite is confirmed to high precision, matching the exact des Cloizeaux--Pearson result \cite{DesCloizeauxPearson} ($R^2=0.999994$ for linear scaling, versus $R^2=0.009$ for the quadratic alternative). The metric-encoding prerequisite is falsified in its originally hoped-for Euclidean form ($R^2=0.9998$ favors a logarithmic, holographically-flavored candidate distance instead, consistent with Calabrese--Cardy entanglement scaling \cite{CalabreseCardy}), but recovers cleanly in a gapped control substrate, pointing to a specific, non-Euclidean alternative rather than leaving the question open in the abstract. Establishing an emergent gauge redundancy, and extending both tests beyond the one-dimensional Heisenberg chain, remain the framework's principal open problems (Sec.~\ref{sec:limitations}). This approach offers a conceptually consistent, precisely delineated, and partly numerically tested foundation for quantum gravity, whose central claims are stated -- and where tested, resolved one way or the other -- as falsifiable technical questions rather than as accomplished results asserted without evidence.
 
-\begin{thebibliography}{99}
+\begin{thebibliography}{9}
 
 \bibitem{DeWitt}
-B.~S.~DeWitt, Phys.\ Rev.\ \textbf{160}, 1113 (1967).
+B.~S.~DeWitt, ``Quantum Theory of Gravity,'' Phys.\ Rev.\ \textbf{160}, 1113 (1967).
+
+\bibitem{Dirac}
+P.~A.~M.~Dirac, \emph{The Principles of Quantum Mechanics}, Oxford University Press (1930).
 
 \bibitem{Einstein}
-A.~Einstein, Annalen der Physik \textbf{49}, 769 (1916).
+A.~Einstein, ``The Foundation of the General Theory of Relativity,'' Annalen der Physik \textbf{49}, 769 (1916).
 
 \bibitem{Jacobson}
-T.~Jacobson, Phys.\ Rev.\ Lett.\ \textbf{75}, 1260 (1995).
+T.~Jacobson, ``Thermodynamics of Spacetime: The Einstein Equation of State,'' Phys.\ Rev.\ Lett.\ \textbf{75}, 1260 (1995).
 
-\bibitem{Sakharov}
-A.~D.~Sakharov, Sov.\ Phys.\ Dokl.\ \textbf{12}, 1040 (1968); reprinted in Gen.\ Rel.\ Grav.\ \textbf{32}, 365 (2000).
-
-\bibitem{Verlinde}
-E.~Verlinde, JHEP \textbf{04}, 029 (2011).
+\bibitem{ERPR}
+L.~Susskind, ``ER=EPR, GHZ, and the Consistency of Quantum Measurements,'' Fortschritte der Physik \textbf{64}, 72 (2016).
 
 \bibitem{VanRaamsdonk}
-M.~Van Raamsdonk, Gen.\ Rel.\ Grav.\ \textbf{42}, 2323 (2010).
+M.~Van Raamsdonk, ``Building up spacetime with quantum entanglement,'' Gen.\ Rel.\ Grav.\ \textbf{42}, 2323 (2010).
 
-\bibitem{ER=EPR}
-J.~Maldacena and L.~Susskind, Fortsch.\ Phys.\ \textbf{61}, 781 (2013).
+\bibitem{Weinberg}
+S.~Weinberg, ``Photons and Gravitons in S-Matrix Theory: Derivation of Charge Conservation and Equality of Gravitational and Inertial Mass,'' Phys.\ Rev.\ \textbf{135}, B1049 (1964).
 
-\bibitem{Bekenstein}
-J.~D.~Bekenstein, Phys.\ Rev.\ D \textbf{7}, 2333 (1973).
+\bibitem{FierzPauli}
+M.~Fierz and W.~Pauli, ``On relativistic wave equations for particles of arbitrary spin in an electromagnetic field,'' Proc.\ Roy.\ Soc.\ Lond.\ A \textbf{173}, 211 (1939).
 
-\bibitem{LIGO}
-B.~P.~Abbott \emph{et al.} (LIGO Scientific Collaboration and Virgo Collaboration), Phys.\ Rev.\ Lett.\ \textbf{116}, 061102 (2016).
+\bibitem{Hinterbichler}
+K.~Hinterbichler, ``Theoretical Aspects of Massive Gravity,'' Rev.\ Mod.\ Phys.\ \textbf{84}, 671 (2012).
 
-\bibitem{Giamarchi}
-T.~Giamarchi, \emph{Quantum Physics in One Dimension} (Oxford University Press, 2004).
+\bibitem{BelkinNiyogi}
+M.~Belkin and P.~Niyogi, ``Towards a theoretical foundation for Laplacian-based manifold methods,'' J.\ Comput.\ Syst.\ Sci.\ \textbf{74}, 1289 (2008).
+
+\bibitem{Singer}
+A.~Singer, ``From graph to manifold Laplacian: the convergence rate,'' Appl.\ Comput.\ Harmon.\ Anal.\ \textbf{21}, 128 (2006).
+
+\bibitem{JacobsonEntanglement}
+T.~Jacobson, ``Entanglement Equilibrium and the Einstein Equation,'' Phys.\ Rev.\ Lett.\ \textbf{116}, 201101 (2016).
+
+\bibitem{Faulkner}
+T.~Faulkner, M.~Guica, T.~Hartman, R.~C.~Myers, and M.~Van Raamsdonk, ``Gravitation from entanglement in holographic CFTs,'' JHEP \textbf{1403}, 051 (2014).
+
+\bibitem{Hogan}
+C.~J.~Hogan, ``Measurement of quantum fluctuations in geometry,'' Phys.\ Rev.\ D \textbf{77}, 104031 (2008).
+
+\bibitem{Liberati}
+S.~Liberati, ``Tests of Lorentz invariance: a 2013 update,'' Class.\ Quantum Grav.\ \textbf{30}, 133001 (2013).
+
+\bibitem{DesCloizeauxPearson}
+J.~des Cloizeaux and J.~J.~Pearson, ``Spin-Wave Spectrum of the Antiferromagnetic Linear Chain,'' Phys.\ Rev.\ \textbf{128}, 2131 (1962).
+
+\bibitem{CalabreseCardy}
+P.~Calabrese and J.~Cardy, ``Entanglement entropy and quantum field theory,'' J.\ Stat.\ Mech.\ \textbf{0406}, P06002 (2004).
 
 \end{thebibliography}
 
